@@ -3,10 +3,10 @@
     <header>
       <div class="container">
         <nav class="mainMenu blue">
-          <li><router-link to="/" exact>Home</router-link></li>
-          <li><router-link to="/portfolio">Portfolio</router-link></li>
-          <li><router-link to="/about">About me</router-link></li>
-          <li><router-link to="/contacts">Contacts</router-link></li>
+          <li><router-link to="/" active-class="active" exact>Home</router-link></li>
+          <li><router-link to="/portfolio" active-class="active">Portfolio</router-link></li>
+          <li><router-link to="/about" active-class="active">About me</router-link></li>
+          <li><router-link to="/contacts" active-class="active">Contacts</router-link></li>
         </nav>
       </div>
     </header>
