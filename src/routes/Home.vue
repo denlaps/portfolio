@@ -9,7 +9,7 @@
           class="delayedRect__bracket top" 
           :style="bracketPos"
         />
-        <figcaption class="delayedRect__info">
+        <figcaption class="delayedRect__info" :style="bracketPos">
           <h1>
             Hello!<br>
             My name is Denis.<br>
@@ -42,6 +42,14 @@
 export default {
   data() {
     return {
+      rectRange: {
+        x: 40,
+        y: 10
+      },
+      rectStep: 2,
+      moveStarted: false,
+      mouseTimeout: null,
+
       brackets: {
         x: 0,
         y: 0
@@ -70,21 +78,55 @@ export default {
   },
 
   methods: {
+    inRange(movedPos, param) {
+      return movedPos[param] >= this.rectRange[param] * (-1) && 
+      movedPos[param] <= this.rectRange[param]
+    },
+
+    getMax(param) {
+      return this.brackets[param] < 0 ? this.rectRange[param] * (-1) : this.rectRange[param]
+    },
+
+    mouseHandler(cb) {
+      // if(this.mouseTimeout) {
+      //   clearTimeout(this.mouseTimeout)
+      //   this.moveStarted = false
+      // }
+
+      // if(!this.moveStarted) {
+      //   this.moveStarted = true
+
+      //   this.mouseTimeout = setTimeout(() => {
+      //     cb()
+      //     this.moveStarted = false
+      //   }, 10);
+      // }
+
+      setTimeout(() => {
+        cb()
+      }, 0);
+    },
+  
     moveRect(ev) {
-      // const maxRange = 30
-      const moveDiff = {
-        x: this.prevCursorPos.x - ev.clientX,
-        y: this.prevCursorPos.y - ev.clientY
-      }
+      // this.mouseHandler(() => {
+        window.console.log('make move')
+        const movedPos = {
+          x: this.prevCursorPos.x > ev.clientX ? this.brackets.x - this.rectStep : this.brackets.x + this.rectStep,
+          y: this.prevCursorPos.y > ev.clientY ? this.brackets.y - this.rectStep : this.brackets.y + this.rectStep
+        }
 
-      // reCalc pos
-      this.brackets.x += moveDiff.x
-      this.brackets.y += moveDiff.y
+        const validX = this.inRange(movedPos, 'x')
+        const validY = this.inRange(movedPos, 'y')
 
-      this.prevCursorPos = {
-        x: ev.clientX,
-        y: ev.clientY
-      }
+        // reCalc pos
+        this.brackets.x = validX ? movedPos.x : this.getMax('x');
+        this.brackets.y = validY ? movedPos.y : this.getMax('y');
+
+        this.prevCursorPos = {
+          x: ev.clientX,
+          y: ev.clientY
+        }
+      // })
     }
   }
 }
@@ -109,6 +151,7 @@ export default {
       position: relative;
       left: -70px;
       z-index: 3;
+      transition: transform 450ms;
 
       h1 {
         font-family: 'Montserrat';
@@ -133,7 +176,7 @@ export default {
       width: 100%;
       height: 40px;
       border: 4px solid $lightBlue;
-      transition: translate $trDelay;
+      transition: transform $trDelay;
 
       &.top {
         top: 0;
@@ -160,6 +203,7 @@ export default {
         width: auto;
         height: 115%;
         object-fit: cover;
+        transition: transform $trDelay;
       }
     }
   }
