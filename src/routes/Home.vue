@@ -11,8 +11,7 @@
         />
         <figcaption class="delayedRect__info" :style="bracketPos">
           <h1>
-            <u class="consoleLine">{{ helloPrint }}</u>
-            <!-- Hello!<br> -->
+            <console-line />
             My name is Denis.<br>
             I'm — frontend-<br>
             developer
@@ -40,19 +39,11 @@
 </template>
 
 <script>
+import consoleLine from '../components/Console'
+
 export default {
   data() {
     return {
-      helloStack: [
-        'hello_world',
-        'hello.js',
-        'Hello, world!',
-        'hello.vue',
-        'hello.php'
-      ],
-      helloPrint: '',
-      nextMsg: [],
-
       rectStep: 2,     
       rectRange: {
         x: 40,
@@ -71,6 +62,8 @@ export default {
     }
   },
 
+  components: { consoleLine },
+
   computed: {
     bracketPos() {
       return {
@@ -84,68 +77,15 @@ export default {
 
   mounted() {
     document.addEventListener('mousemove', this.moveRect)
-    const index = this.getRandFrom(0, this.helloStack.length)
-    this.helloPrint = this.helloStack[index]
-    this.helloScript(3000)
   },
 
   methods: {
+    /* Gen random num in range */
     getRandFrom(min, max) {
       return Math.floor(Math.random() * (max - min)) + min
     },
 
-    typeText(cb) {
-
-      const RAND_MS = this.getRandFrom(100, 300)
-      setTimeout(cb, RAND_MS)
-    },
-
-    clearConsole() {
-      this.typeText(() => {
-        const helloArr = this.helloPrint.split('')
-        helloArr.pop()
-        this.helloPrint = helloArr.join('')
-
-        if(this.helloPrint.length > 0) {
-          const regExp = new RegExp('^' + this.helloPrint)
-          const consoleMatch = this.nextMsg.join('').match(regExp)
-          const sameWord = consoleMatch ? consoleMatch[0] : null
-            
-          if(this.helloPrint === sameWord) {
-            this.nextMsg = this.nextMsg.join('').replace(regExp, '').split('')
-            this.pushToConsole()
-          } else {
-            this.clearConsole()
-          }
-        } else {
-          this.pushToConsole()
-        }
-      })
-    },
-
-    pushToConsole() {
-      this.typeText(() => {
-        const helloArr = this.helloPrint.split('')
-
-        helloArr.push(this.nextMsg.shift())
-        
-        this.helloPrint = helloArr.join('')
-        if(this.nextMsg.length > 0) {
-          this.pushToConsole()
-        } else {
-          this.helloScript(2000)
-        }
-      })
-    },
-
-    helloScript(startMS) {
-      setTimeout(() => {
-        const index = this.getRandFrom(0, this.helloStack.length)
-        this.nextMsg = this.helloStack[index].split('')
-        this.clearConsole()
-      }, startMS);
-    },
-
+    /* Changing rect position in range? */
     inRange(movedPos, param) {
       return movedPos[param] >= this.rectRange[param] * (-1) && 
       movedPos[param] <= this.rectRange[param]
@@ -249,40 +189,6 @@ export default {
         height: 115%;
         object-fit: cover;
       }
-    }
-  }
-
-  .consoleLine {
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 75px;
-    box-sizing: border-box;
-    padding: 10px;
-    position: relative;
-    left: -10px;
-    top: 0px;
-    background: #000;
-    color: #5c6b5c;
-    font-family: consolas;
-    font-weight: normal;
-
-    @keyframes cursorBlinking {
-      0% {
-        content: ''
-      }
-
-      100% {
-        content: '█';
-      }
-    }
-
-    &:after {
-      content: '█';
-      animation-name: cursorBlinking;
-      animation-iteration-count: infinite;
-      animation-duration: 1s;
-      animation-timing-function: steps(2);
     }
   }
 </style>
