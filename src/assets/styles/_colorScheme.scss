@@ -1,0 +1,127 @@
+.page {
+  &__home {
+    header {
+      background: #292D45;
+    }
+
+    .mainMenu {
+      li {
+        a {
+          color: $lightBlue;
+
+          &.active {
+            background: #1D2135;
+          }
+
+          &:hover {
+            background: #1D2135 !important;
+          }
+        }
+      }
+    }
+
+    main {
+      background: #1D2135;
+    }
+  }
+
+  &__portfolio {
+    header {
+      background: #384149;
+    }
+
+    .mainMenu {
+      li {
+        a {
+          color: $lightBlue;
+
+          &.active {
+            background: #2A343D;
+          }
+
+          &:hover {
+            background: #2A343D !important;
+          }
+        }
+      }
+    }
+
+    main {
+      background: #2A343D;
+    }
+
+    .attachedBlock {
+      &__head {
+        background: #2A343D;
+        color: $lightBlue;
+        padding-left: 30px;
+        font-family: 'Montserrat';
+        font-size: 28px;
+      }
+    }
+  }
+
+  &__about {
+    header {
+      background: #345060;
+    }
+
+    .mainMenu {
+      li {
+        a {
+          color: $goldColor;
+
+          &.active {
+            background: #28404D;
+          }
+
+          &:hover {
+            background: #28404D !important;
+          }
+        }
+      }
+    }
+
+    main {
+      background: #28404D;
+    }
+  }
+
+  &__contacts {
+    header {
+      background: $goldColor;
+    }
+
+    .mainMenu {
+      li {
+        a {
+          color: #253D37;
+
+          &.active {
+            background: #25333D;
+            color: $goldColor;
+          }
+
+          &:hover {
+            background: #25333D !important;
+            color: $goldColor !important;
+          }
+        }
+      }
+
+      &:hover {
+        li {
+          a {
+            &.active {
+              color: #253D37;
+            }
+          }
+        }
+      }
+    }
+
+    main {
+      background: #25333D;
+    }
+  }
+}

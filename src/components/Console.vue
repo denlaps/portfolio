@@ -8,12 +8,13 @@ export default {
     return {
       helloStack: [
         'npm i -g skills',
+        'npm i parse-hh',
         'hello_world',
         'hello.js',
         'Hello, world!',
         'hello.vue',
         'hello.php',
-        'Hello.html'
+        'Hello.json'
       ],
       helloPrint: '',
       helloArr: [],
@@ -55,34 +56,31 @@ export default {
     },
 
     /* Random delay on change symbol */
-    typeText(cb) {
+    typeDelay(cb) {
       const RAND_MS = this.getRandFrom(100, 300)
       setTimeout(cb, RAND_MS)
     },
 
     /* Delete symbol */
     clearConsole() {
-      this.typeText(() => {
-        if(this.helloArr.length > 0) {
-          const regExp = new RegExp('^' + this.helloPrint)
-          const consoleMatch = this.nextMsg.join('').match(regExp)
-          const sameWord = consoleMatch ? consoleMatch[0] : null
-            
-          if(this.helloPrint === sameWord) {
-            this.nextMsg = this.nextMsg.join('').replace(regExp, '').split('')
-            this.pushToConsole()
-          } else {
-            this.helloArr.pop()
-            this.clearConsole()
-          }
-        } else {
+      this.typeDelay(() => {
+        const regExp = new RegExp('^' + this.helloPrint)
+        const consoleMatch = this.nextMsg.join('').match(regExp)
+        const sameWord = consoleMatch ? consoleMatch[0] : null
+        const consoleEmpty = this.helloArr.length === 0
+
+        if(consoleEmpty || this.helloPrint === sameWord) {
+          this.nextMsg = this.nextMsg.join('').replace(regExp, '').split('')
           this.pushToConsole()
+        } else {
+          this.helloArr.pop()
+          this.clearConsole()
         }
       })
     },
 
     pushToConsole() {
-      this.typeText(() => {
+      this.typeDelay(() => {
         if(this.nextMsg.length > 0) {
           this.helloArr.push(this.nextMsg.shift())
           this.pushToConsole()
@@ -99,19 +97,18 @@ export default {
   .consoleLine {
     text-decoration: none;
     display: block;
-    width: 100%;
-    height: 75px;
+    width: 108%;
     box-sizing: border-box;
     padding: 10px;
     position: relative;
     left: -10px;
     top: 0px;
     background: rgb(12, 12, 12);
-    color: rgb(204, 204, 204);
+    color: #535a55;
     font-family: consolas;
     font-weight: normal;
-    font-size: 30px;
-    opacity: 0.7;
+    font-size: 4vh;
+    opacity: 1;
 
     @keyframes cursorBlinking {
       0% {

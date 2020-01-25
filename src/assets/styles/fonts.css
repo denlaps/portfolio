@@ -2,9 +2,9 @@
   font-family: 'Roboto';
   src: local('Roboto'),
   local('RobotoCondensed-Regular'),
-  url('fonts/Robotocondensed.woff2') format('woff2'),
-  url('fonts/Robotocondensed.woff') format('woff'),
-  url('fonts/Robotocondensed.ttf') format('truetype');
+  url('../fonts/Robotocondensed.woff2') format('woff2'),
+  url('../fonts/Robotocondensed.woff') format('woff'),
+  url('../fonts/Robotocondensed.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -13,9 +13,9 @@
   font-family: 'Roboto Light';
   src: local('Roboto Condensed Light'),
   local('RobotoCondensed-Light'),
-  url('fonts/Robotocondensedlight.woff2') format('woff2'),
-  url('fonts/Robotocondensedlight.woff') format('woff'),
-  url('fonts/Robotocondensedlight.ttf') format('truetype');
+  url('../fonts/Robotocondensedlight.woff2') format('woff2'),
+  url('../fonts/Robotocondensedlight.woff') format('woff'),
+  url('../fonts/Robotocondensedlight.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
@@ -24,9 +24,9 @@
   font-family: 'Montserrat';
   src: local('Montserrat'),
   local('Montserrat-Regular'),
-  url('fonts/montserrat.woff2') format('woff2'),
-  url('fonts/montserrat.woff') format('woff'),
-  url('fonts/montserrat.ttf') format('truetype');
+  url('../fonts/montserrat.woff2') format('woff2'),
+  url('../fonts/montserrat.woff') format('woff'),
+  url('../fonts/montserrat.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }

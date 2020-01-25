@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <video preload="auto" autoplay loop muted>
+  <main>
+    <video id="videoBg" preload="auto" autoplay loop muted>
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
     <div class="overlay">
@@ -35,7 +35,7 @@
         />
       </figure>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -76,6 +76,12 @@ export default {
   },
 
   mounted() {
+    const $videoBg = document.getElementById('videoBg')
+    
+    $videoBg.addEventListener('canplay', () => {
+      $videoBg.classList.add('show')
+    })
+
     document.addEventListener('mousemove', this.moveRect)
   },
 
@@ -85,7 +91,7 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min
     },
 
-    /* Changing rect position in range? */
+    /* Does new rect position in range? */
     inRange(movedPos, param) {
       return movedPos[param] >= this.rectRange[param] * (-1) && 
       movedPos[param] <= this.rectRange[param]
@@ -118,17 +124,45 @@ export default {
 </script>
 
 <style lang="scss">
-  $lightBlue: #D8FFFF;
-  $changedArrow: lighten($lightBlue, 10%);
-  $trDelay: 300ms;
+  main {
+    video {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 1s;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+
+    .overlay {
+      background: rgba(29, 33, 56, 0.9);
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+  }
 
   .delayedRect {
     color: $lightBlue;
     position: relative;
     flex-basis: 100%;
-    max-width: 750px;
+    max-width: 720px;
     margin: 0 17%;
-    padding: 65px 0;
+    padding: 8vh 0;
     display: flex;
     align-items: center;
 
@@ -140,8 +174,8 @@ export default {
 
       h1 {
         font-family: 'Montserrat';
-        font-size: 48px;
-        line-height: 55px;
+        font-size: 5.5vh;
+        line-height: 8vh;
       }
 
       span {
@@ -159,7 +193,7 @@ export default {
       position: absolute;
       left: 0;
       width: 100%;
-      height: 40px;
+      height: 5vh;
       border: 4px solid $lightBlue;
       transition: transform $trDelay;
 
@@ -186,8 +220,10 @@ export default {
         background: #000;
         display: inline-block;
         width: auto;
-        height: 115%;
+        max-width: 320px;
+        min-height: 115%;
         object-fit: cover;
+        object-position: center;
       }
     }
   }
