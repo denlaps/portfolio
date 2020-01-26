@@ -1,6 +1,27 @@
 <template>
-  <main>
+  <div class="container">
     <section class="skills">
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
       <figure class="skills__item">
         <i class="fab fa-node"></i>
         <figcaption>
@@ -46,7 +67,7 @@
         </figure>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -68,8 +89,11 @@ export default {
 
 <style lang="scss">
   .skills {
+    padding: 40px;
+
     &__item {
       display: flex;
+      color: $lightBlue;
     }
   }
 

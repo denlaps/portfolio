@@ -1,2 +1,9 @@
+@import '../assets/styles/fonts.css';
 @import "./vars";
-@import "./colorScheme"
+
+@import "./main";
+@import "./colorScheme";
+
+@import "./media_1280";
+@import "./media_768";
+@import "./media_320";

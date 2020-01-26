@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <video id="videoBg" preload="auto" autoplay loop muted>
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
@@ -19,7 +19,7 @@
           <span>working on IT-projects more than 2 years</span>
         </figcaption>
         <div class="delayedRect__photo">
-          <img src="../assets/photos/photo1.jpg" alt="">
+          <img src="../assets/photos/photo2.jpg" alt="">
           <div class="nextButton">
             <button>Watch works</button>
             <i class="arrow">
@@ -35,7 +35,7 @@
         />
       </figure>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
