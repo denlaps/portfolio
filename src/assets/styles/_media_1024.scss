@@ -1,0 +1,23 @@
+@media (max-width: 1024px) {
+  .mainMenu {
+    display: none;
+
+    &__burger {
+      display: flex;
+      align-items: center;
+      background: none;
+      width: 50%;
+      height: 100%;
+      padding: 0 40px;
+      font-size: 25px;
+      transition: background-color $trDelay, color $trDelay;
+      
+      span {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 18px;
+        line-height: 1;
+      }
+    }
+  }
+}

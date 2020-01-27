@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <video id="videoBg" preload="auto" autoplay loop muted>
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
@@ -144,38 +144,41 @@ export default {
 
     .overlay {
       background: rgba(29, 33, 56, 0.9);
-      position: absolute;
-      top: 0;
-      left: 0;
       display: flex;
-      width: 100vw;
-      height: 100vh;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 40px 0 ($headerHeight + 40px);
       z-index: 2;
+      overflow-y: auto;
     }
   }
 
   .delayedRect {
     color: $lightBlue;
     position: relative;
-    flex-basis: 100%;
     max-width: 720px;
-    margin: 0 17%;
-    padding: 8vh 0;
+    margin: auto 10%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 8vh 0;
 
     &__info {
-      position: relative;
-      left: -70px;
+      width: 50%;
+      margin-right: auto;
       z-index: 3;
       transition: transform 450ms;
 
       h1 {
         font-family: 'Montserrat';
-        font-size: 5.5vh;
-        line-height: 8vh;
+        // font-size: 5.5vh;
+        // line-height: 8vh;
+        font-size: 35px;
+        line-height: 46px;
       }
 
       span {
@@ -189,10 +192,8 @@ export default {
     }
 
     &__bracket {
-      display: inline-block;
       position: absolute;
-      left: 0;
-      width: 100%;
+      width: 94%;
       height: 5vh;
       border: 4px solid $lightBlue;
       transition: transform $trDelay;
@@ -209,21 +210,60 @@ export default {
     }
 
     &__photo {
-      display: flex;
-      flex-direction: column;
       position: absolute;
-      right: -15%;
+      right: -5%;
       top: -7.5%;
-      height: 100%;
+      height: 115%;
 
       img {
         background: #000;
         display: inline-block;
-        width: auto;
-        max-width: 320px;
-        min-height: 115%;
+        width: 100%;
+        height: 100%;
+        max-width: 270px;
         object-fit: cover;
         object-position: center;
+      }
+
+      .nextButton {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+
+        button {
+          background: #D8FFFF;
+          height: 53px;
+          flex: 1;
+          font-family: 'Montserrat';
+          font-weight: bold;
+          font-size: 22px;
+          line-height: 27px;
+          color: #1D2138;
+          margin-right: 10px;
+          transition: background-color $trDelay;
+
+          &:hover {
+            background: $changedArrow;
+          }
+        }
+
+        .arrow {
+          width: 15%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform $trDelay;
+        }
+
+        &:hover {
+          .arrow {
+            transform: translateX(5px);
+
+            path {
+              fill: $changedArrow;
+            }
+          }
+        }
       }
     }
   }

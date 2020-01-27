@@ -95,20 +95,21 @@ export default {
 
 <style lang="scss">
   .consoleLine {
+    background: rgb(12, 12, 12);
     text-decoration: none;
     display: block;
-    width: 108%;
     box-sizing: border-box;
-    padding: 10px;
     position: relative;
-    left: -10px;
+    width: 110%;
+    left: -5%;
     top: 0px;
-    background: rgb(12, 12, 12);
+    padding: 10px;
     color: #535a55;
     font-family: consolas;
     font-weight: normal;
-    font-size: 4vh;
-    opacity: 1;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
 
     @keyframes cursorBlinking {
       0% {

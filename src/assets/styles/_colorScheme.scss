@@ -18,6 +18,15 @@
           }
         }
       }
+
+      &__burger {
+        color: $lightBlue;
+
+        &:hover {
+          background: $lightBlue;
+          color: #1D2135;
+        }
+      }
     }
 
     main {
@@ -42,6 +51,15 @@
           &:hover {
             background: #2A343D !important;
           }
+        }
+      }
+
+      &__burger {
+        color: $lightBlue;
+
+        &:hover {
+          background: $lightBlue;
+          color: #2A343D;
         }
       }
     }
@@ -75,6 +93,15 @@
           &:hover {
             background: #28404D !important;
           }
+        }
+      }
+
+      &__burger {
+        color: $goldColor;
+
+        &:hover {
+          background: $goldColor;
+          color: #28404D;
         }
       }
     }
@@ -113,6 +140,15 @@
               color: #253D37;
             }
           }
+        }
+      }
+
+      &__burger {
+        color: #253D37;
+
+        &:hover {
+          background: #25333D;
+          color: $goldColor;
         }
       }
     }

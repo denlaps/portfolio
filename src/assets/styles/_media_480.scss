@@ -1,0 +1,25 @@
+@media (max-width: 480px) {
+  .delayedRect {
+    margin: auto 5%; 
+
+    &__info {
+      h1 {
+        font-size: 25px;
+        line-height: 33px;
+      }
+    }
+
+    &__photo {
+      width: 100%;
+      max-width: 320px;
+
+      img {
+        max-width: unset;
+      }
+    }
+  }
+
+  .consoleLine {
+    font-size: 20px;
+  }
+}

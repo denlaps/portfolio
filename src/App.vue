@@ -2,6 +2,10 @@
   <div id="app" :class="currentClass">
     <header>
       <div class="container">
+        <button class="mainMenu__burger">
+          <i class="fas fa-bars"></i>
+          <span>Menu</span>
+        </button>
         <nav class="mainMenu">
           <li><router-link to="/" active-class="active" exact>Home</router-link></li>
           <li><router-link to="/portfolio" active-class="active">Portfolio</router-link></li>
@@ -27,7 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  
-</style>

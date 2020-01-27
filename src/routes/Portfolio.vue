@@ -29,6 +29,41 @@
           <u class="skills__line"></u>
         </figcaption>
       </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
+      <figure class="skills__item">
+        <i class="fab fa-node"></i>
+        <figcaption>
+          <span>Node.js</span>
+          <u class="skills__line"></u>
+        </figcaption>
+      </figure>
     </section>
     <section class="works attachedBlock">
       <h2 class="attachedBlock__head">Works</h2>
@@ -76,6 +111,12 @@ export default {
     setTimeout(() => {
       const $block = document.querySelector('.attachedBlock')
       $block.classList.add('show')
+
+      // wait for transition ending => then show scroll
+      setTimeout(() => {
+        const $section = document.querySelector('section')
+        $section.style.overflowY = 'auto'
+      }, 400);
     }, 300);
   },
 
@@ -101,9 +142,8 @@ export default {
     &__item {
       position: relative;
       display: flex;
-      min-width: 300px;
-      justify-content: center;
-      align-items: center;
+      // justify-content: center;
+      // align-items: center;
       overflow: hidden;
 
       img {
