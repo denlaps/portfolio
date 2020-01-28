@@ -110,12 +110,12 @@ export default {
   mounted() {
     setTimeout(() => {
       const $block = document.querySelector('.attachedBlock')
-      $block.classList.add('show')
+      if($block) $block.classList.add('show')
 
       // wait for transition ending => then show scroll
       setTimeout(() => {
         const $section = document.querySelector('section')
-        $section.style.overflowY = 'auto'
+        if($section) $section.style.overflowY = 'auto'
       }, 400);
     }, 300);
   },
@@ -142,8 +142,6 @@ export default {
     &__item {
       position: relative;
       display: flex;
-      // justify-content: center;
-      // align-items: center;
       overflow: hidden;
 
       img {

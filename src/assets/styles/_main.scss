@@ -18,6 +18,8 @@ body {
 #app {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   position: relative;
@@ -28,11 +30,10 @@ header {
   flex-basis: 71px;
   display: flex;
   justify-content: center;
+  z-index: 2;
   width: 100%;
   height: $headerHeight;
   min-height: $headerHeight;
-  position: relative;
-  z-index: 10;
   transition: background-color $chSchemeDelay;
 
   .container {
@@ -45,11 +46,6 @@ header {
 }
 
 .mainMenu {
-  display: flex;
-  height: 100%;
-  font-size: 18px;
-  line-height: 26px;
-
   li {
     list-style: none;
     height: inherit;
@@ -59,7 +55,7 @@ header {
       display: flex;
       align-items: center;
       height: inherit;
-      padding: 0 30px;
+      padding: 20px 30px;
       transition: background-color $trDelay, color $trDelay;
     }
   }
@@ -72,6 +68,17 @@ header {
         }
       }
     }
+  }
+  
+  &__desk {
+    display: flex;
+    height: 100%;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  &__mobile {
+    display: none;
   }
 
   &__burger {
@@ -101,7 +108,7 @@ main {
       position: absolute;
       top: 0;
       right: 0;
-      z-index: 11;
+      z-index: 4;
       transform: translateX(100%);
       transition: transform 400ms;
 
@@ -110,10 +117,13 @@ main {
         align-items: center;
         height: $headerHeight;
         width: 100%;
-        z-index: 11;
         padding: 0 30px;
         font-family: 'Montserrat';
         font-size: 28px;
+      }
+
+      &.low-layer {
+        z-index: 2;
       }
 
       .wrapper {

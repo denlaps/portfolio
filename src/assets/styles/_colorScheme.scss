@@ -1,134 +1,73 @@
-.page {
-  &__home {
-    header {
-      background: #292D45;
-    }
-
-    .mainMenu {
-      li {
-        a {
-          color: $lightBlue;
-
-          &.active {
-            background: #1D2135;
-          }
-
-          &:hover {
-            background: #1D2135 !important;
-          }
-        }
-      }
-
-      &__burger {
-        color: $lightBlue;
-
-        &:hover {
-          background: $lightBlue;
-          color: #1D2135;
-        }
-      }
-    }
-
-    main {
-      background: #1D2135;
-    }
+@mixin newScheme($headBg, $color, $activeColor) {
+  header {
+    background: $headBg;
   }
 
-  &__portfolio {
-    header {
-      background: #384149;
-    }
+  .mainMenu {
+    li {
+      a {
+        color: $color;
 
-    .mainMenu {
-      li {
-        a {
-          color: $lightBlue;
+        &.active {
+          background: $activeColor;
 
-          &.active {
-            background: #2A343D;
-          }
-
-          &:hover {
-            background: #2A343D !important;
+          // If last page
+          @if($headBg==$goldColor) {
+            color: $headBg;
           }
         }
-      }
-
-      &__burger {
-        color: $lightBlue;
 
         &:hover {
-          background: $lightBlue;
-          color: #2A343D;
-        }
-      }
-    }
+          background: $activeColor !important;
 
-    main {
-      background: #2A343D;
-    }
-
-    .attachedBlock {
-      &__head {
-        background: #2A343D;
-        color: $lightBlue;
-      }
-    }
-  }
-
-  &__about {
-    header {
-      background: #345060;
-    }
-
-    .mainMenu {
-      li {
-        a {
-          color: $goldColor;
-
-          &.active {
-            background: #28404D;
-          }
-
-          &:hover {
-            background: #28404D !important;
+          // If last page
+          @if($headBg==$goldColor) {
+            color: $headBg !important;
           }
         }
       }
+    }
 
-      &__burger {
-        color: $goldColor;
-
+    &__desk {
+      // If last page
+      @if($headBg==$goldColor) {
         &:hover {
-          background: $goldColor;
-          color: #28404D;
+          li {
+            a {
+              &.active {
+                color: $color;
+              }
+            }
+          }
         }
       }
     }
 
-    main {
-      background: #28404D;
-    }
-  }
-
-  &__contacts {
-    header {
-      background: $goldColor;
-    }
-
-    .mainMenu {
+    &__mobile {
       li {
         a {
-          color: #253D37;
+          @if($headBg != $goldColor) {
+            // Other pages
+            color: $headBg;
 
-          &.active {
-            background: #25333D;
-            color: $goldColor;
-          }
+            &.active {
+              color: $color;
+            }
 
-          &:hover {
-            background: #25333D !important;
-            color: $goldColor !important;
+            &:hover {
+              color: $color !important;
+            }
+          } @else {
+            // Last page
+            color: $color;
+
+            &.active {
+              color: $headBg;
+            }
+
+            &:hover {
+              color: $headBg !important;
+            }
           }
         }
       }
@@ -137,24 +76,77 @@
         li {
           a {
             &.active {
-              color: #253D37;
+              @if($headBg == $goldColor) {
+                // If last page
+                color: $color;
+              } @else {
+                // Other pages
+                color: $activeColor;
+              }
             }
           }
         }
       }
+    }
 
-      &__burger {
-        color: #253D37;
+    &__burger {
+
+      // If not last page
+      @if($headBg !=$goldColor) {
+        color: $color;
 
         &:hover {
-          background: #25333D;
-          color: $goldColor;
+          background: $activeColor;
+        }
+
+        &.selected {
+          background: $activeColor;
+          color: $color;
+          box-shadow: 0 0 1000px 1000px $color;
+        }
+      } @else {
+        // If last page
+        color: $activeColor;
+
+        &:hover {
+          background: $activeColor;
+          color: $headBg;
+        }
+
+        &.selected {
+          background: $activeColor;
+          color: $headBg;
+          box-shadow: 0 0 1000px 1000px $headBg;
         }
       }
     }
+  }
 
-    main {
-      background: #25333D;
+  main {
+    background: $activeColor;
+
+    .attachedBlock {
+      &__head {
+        color: $lightBlue;
+      }
     }
+  }
+}
+
+.page {
+  &__home {
+    @include newScheme(#292D45, $lightBlue, #1D2135)
+  }
+
+  &__portfolio {
+    @include newScheme(#384149, $lightBlue, #2A343D)
+  }
+
+  &__about {
+    @include newScheme(#345060, $goldColor, #28404D)
+  }
+
+  &__contacts {
+    @include newScheme($goldColor, #253D37, #25333D)
   }
 }

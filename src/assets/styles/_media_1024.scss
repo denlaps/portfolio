@@ -1,17 +1,52 @@
 @media (max-width: 1024px) {
   .mainMenu {
-    display: none;
+    &__desk {
+      display: none;
+    }
+
+    &__mobile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      z-index: 5;
+      opacity: 0;
+      transition: 300ms;
+      transform: translateY(-50%);
+
+      li {
+        width: 100%;
+
+        a {
+          font-size: 30px;
+          justify-content: center;
+          padding: 10px;
+        }
+      }
+
+      &_showed {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0%);
+      }
+    }
 
     &__burger {
+      background: none;
       display: flex;
       align-items: center;
-      background: none;
       width: 50%;
-      height: 100%;
+      height: $headerHeight;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
       padding: 0 40px;
       font-size: 25px;
       transition: background-color $trDelay, color $trDelay;
-      
+      transition: box-shadow $trDelay, background-color $trDelay, color $trDelay;
+
       span {
         display: inline-block;
         margin: 0 10px;
