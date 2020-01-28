@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <video id="videoBg" preload="auto" autoplay loop muted>
+    <video 
+      v-if="showVideo" 
+      :class="{ 'show': videoEffect }" 
+      id="videoBg" 
+      preload="auto" 
+      autoplay loop muted
+    >
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
     <div class="overlay">
@@ -49,6 +55,9 @@ import consoleLine from '../components/Console'
 export default {
   data() {
     return {
+      showVideo: false,
+      videoEffect: false,
+
       rectStep: 2,     
       rectRange: {
         x: 40,
@@ -80,17 +89,26 @@ export default {
     }
   },
 
-  mounted() {
-    const $videoBg = document.getElementById('videoBg')
-    
-    $videoBg.addEventListener('canplay', () => {
-      $videoBg.classList.add('show')
-    })
+  watch: {
+    showVideo(status) {
+      setTimeout(() => {
+        this.videoEffect = status
+      }, 0);
+    }
+  },
 
+  mounted() {
+    this.recalcWidth()
+
+    window.addEventListener('resize', this.recalcWidth)
     document.addEventListener('mousemove', this.moveRect)
   },
 
   methods: {
+    recalcWidth() {
+      this.showVideo = window.innerWidth > 768
+    },
+
     /* Gen random num in range */
     getRandFrom(min, max) {
       return Math.floor(Math.random() * (max - min)) + min

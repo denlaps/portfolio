@@ -16,7 +16,15 @@
 </template>
 
 <script>
+import state from '../appState'
+
 export default {
+  data() {
+    return {
+      state
+    }
+  },
+
   props: { className: String },
   computed: {
     getRoutes() {
@@ -24,12 +32,13 @@ export default {
     },
 
     getClass() {
-      return 'mainMenu mainMenu__' + this.className
+      return [
+        'mainMenu mainMenu__' + this.className,
+        {
+          'mainMenu__mobile_showed': this.state.menuOpened && this.className === 'mobile'
+        }
+      ]
     }
   }
 }
 </script>
-
-<style>
-
-</style>

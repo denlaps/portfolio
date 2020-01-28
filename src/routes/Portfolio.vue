@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <section class="skills">
+    <section 
+      class="skills"
+      :style="{ overflowY: addScroll }"
+    >
       <figure class="skills__item">
         <i class="fab fa-node"></i>
         <figcaption>
@@ -65,7 +68,10 @@
         </figcaption>
       </figure>
     </section>
-    <section class="works attachedBlock">
+    <section 
+      class="works attachedBlock"
+      :class="attachClass"
+    >
       <h2 class="attachedBlock__head">Works</h2>
       <div class="wrapper">
         <figure class="works__item">
@@ -106,25 +112,50 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    setTimeout(() => {
-      const $block = document.querySelector('.attachedBlock')
-      if($block) $block.classList.add('show')
+import state from '../appState'
 
-      // wait for transition ending => then show scroll
-      setTimeout(() => {
-        const $section = document.querySelector('section')
-        if($section) $section.style.overflowY = 'auto'
-      }, 400);
-    }, 300);
+export default {
+  data() {
+    return {
+      attachStatus: false,
+      addScroll: 'unset',
+
+      state
+    }
   },
 
+  computed: {
+    attachClass() {
+      return { 
+        'show': this.attachStatus,
+        'low-layer': this.state.menuOpened
+      }
+    }
+  },
+
+  mounted() {
+    this.showAttach()
+  },
+
+  // // Hide attached block when leave route
   // beforeRouteLeave(to, from, next) {
   //   const $block = document.querySelector('.attachedBlock')
   //   $block.classList.remove('show')
   //   setTimeout(next, 370)
-  // }
+  // },
+
+  methods: {
+    showAttach() {
+      setTimeout(() => {
+        this.attachStatus = true
+
+        // wait for transition ending => then show scroll
+        setTimeout(() => {
+          this.addScroll = 'auto'
+        }, 400)
+      }, 300)
+    }
+  }
 }
 </script>
 

@@ -102,7 +102,6 @@
         &.selected {
           background: $activeColor;
           color: $color;
-          box-shadow: 0 0 1000px 1000px $color;
         }
       } @else {
         // If last page
@@ -116,9 +115,18 @@
         &.selected {
           background: $activeColor;
           color: $headBg;
-          box-shadow: 0 0 1000px 1000px $headBg;
         }
       }
+    }
+  }
+
+  &.backLayer::after {
+    @if($headBg != $goldColor) {
+      // Other pages
+      background: $color;
+    } @else {
+      // Last page
+      background: $headBg;
     }
   }
 

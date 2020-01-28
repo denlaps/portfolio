@@ -7,7 +7,12 @@
         />
       </div>
     </header>
-    <button id="burger" class="mainMenu__burger" @click="toggleMenu">
+    <button 
+      id="burger" 
+      class="mainMenu__burger" 
+      :class="burgerClass"
+      @click="toggleMenu"
+    >
       <i class="fas fa-bars"></i>
       <span>{{ $route.name }}</span>
     </button>
@@ -22,9 +27,16 @@
 
 <script>
 import Menu from './components/Menu'
+import state from './appState'
 
 export default {
   name: 'app',
+
+  data() {
+    return {
+      state
+    }
+  },
 
   components: {
     appMenu: Menu
@@ -32,7 +44,14 @@ export default {
 
   computed: {
     currentClass() {
-      return 'page__' + this.$route.name.toLowerCase()
+      return [
+        'page__' + this.$route.name.toLowerCase(),
+        { backLayer: this.state.menuOpened }
+      ]
+    },
+
+    burgerClass() {
+      return { 'selected': this.state.menuOpened }
     }
   },
 
@@ -42,38 +61,15 @@ export default {
     }
   },
 
-  mounted() {
-    window.addEventListener('resize', this.recalcWidth)
-  },
-
   methods: {
-    recalcWidth() {
-      if(window.innerWidth <= 768) {
-        this.toggleVideo('remove')
-      } else {
-        this.toggleVideo('add')
-      }
-    },
-
-    // toggleVideo() {
-    //   const $video = document.querySelector('video source')
-
-    //   $video.removeAttribute('src', '')
-    // },
-
+    // Toggle mobile menu
     toggleMenu(action) {
-      const $burger = document.getElementById('burger')
-      const $menu = document.querySelector('.mainMenu__mobile')
-      const $attached = document.querySelector('.attachedBlock')
-
       if(action === 'close') {
-        $burger.classList.remove('selected')
-        $menu.classList.remove('mainMenu__mobile_showed')
-        if($attached) $attached.classList.remove('low-layer')
+        // Change state
+        this.state.menuOpened = false
       } else {
-        $burger.classList.toggle('selected')
-        $menu.classList.toggle('mainMenu__mobile_showed')
-        if($attached) $attached.classList.toggle('low-layer')
+        // Change state
+        this.state.menuOpened = !this.state.menuOpened
       }
     }
   }

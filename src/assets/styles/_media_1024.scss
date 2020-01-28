@@ -6,14 +6,15 @@
 
     &__mobile {
       display: flex;
+      visibility: hidden;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       position: absolute;
       z-index: 5;
       opacity: 0;
-      transition: 300ms;
       transform: translateY(-50%);
+      transition: transform $trDelay, opacity $trDelay, visibility $trDelay;
 
       li {
         width: 100%;
@@ -26,7 +27,7 @@
       }
 
       &_showed {
-        display: flex;
+        visibility: visible;
         opacity: 1;
         transform: translateY(0%);
       }
@@ -44,8 +45,6 @@
       z-index: 3;
       padding: 0 40px;
       font-size: 25px;
-      transition: background-color $trDelay, color $trDelay;
-      transition: box-shadow $trDelay, background-color $trDelay, color $trDelay;
 
       span {
         display: inline-block;
