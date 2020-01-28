@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <video 
-      v-if="showVideo" 
-      :class="{ 'show': videoEffect }" 
+      v-if="state.showVideo" 
+      :class="{ 'show': state.videoEffect }" 
       id="videoBg" 
-      preload="auto" 
+      preload="auto"
       autoplay loop muted
     >
       <source src="../assets/city.mp4" type="video/mp4">
@@ -50,14 +50,12 @@
 </template>
 
 <script>
+import state from '../appState'
 import consoleLine from '../components/Console'
 
 export default {
   data() {
     return {
-      showVideo: false,
-      videoEffect: false,
-
       rectStep: 2,     
       rectRange: {
         x: 40,
@@ -72,7 +70,9 @@ export default {
       prevCursorPos: {
         x: 0,
         y: 0
-      }
+      },
+
+      state
     }
   },
 
@@ -89,24 +89,24 @@ export default {
     }
   },
 
-  watch: {
-    showVideo(status) {
-      setTimeout(() => {
-        this.videoEffect = status
-      }, 0);
-    }
-  },
-
   mounted() {
-    this.recalcWidth()
-
-    window.addEventListener('resize', this.recalcWidth)
+    this.initVideo()
     document.addEventListener('mousemove', this.moveRect)
   },
 
+  beforeDestroy() {
+    this.state.videoEffect = false
+  },
+
   methods: {
-    recalcWidth() {
-      this.showVideo = window.innerWidth > 768
+    initVideo() {
+      if(window.innerWidth > 768) {
+        this.state.showVideo = true
+
+        setTimeout(() => {
+          this.state.videoEffect = true
+        }, 0);
+      }
     },
 
     /* Gen random num in range */
@@ -198,8 +198,6 @@ export default {
 
       h1 {
         font-family: 'Montserrat';
-        // font-size: 5.5vh;
-        // line-height: 8vh;
         font-size: 35px;
         line-height: 46px;
       }

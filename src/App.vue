@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="currentClass">
+  <div id="app" :class="pageClass">
     <header>
       <div class="container">
         <app-menu 
@@ -7,18 +7,27 @@
         />
       </div>
     </header>
+
     <button 
       id="burger" 
       class="mainMenu__burger" 
       :class="burgerClass"
       @click="toggleMenu"
     >
-      <i class="fas fa-bars"></i>
-      <span>{{ $route.name }}</span>
+      <i class="mainMenu__burger_open">
+        <s></s>
+        <s></s>
+        <s></s>
+      </i>
+      <span>{{ mobileMenuTitle }}</span>
     </button>
-    <app-menu 
-      className="mobile"
-    />
+
+    <div class="backLayer" :class="layerShowClass">
+      <app-menu 
+        className="mobile"
+      />
+    </div>
+
     <main>
       <router-view />
     </main>
@@ -43,15 +52,22 @@ export default {
   },
 
   computed: {
-    currentClass() {
+    pageClass() {
       return [
-        'page__' + this.$route.name.toLowerCase(),
-        { backLayer: this.state.menuOpened }
+        'page__' + this.$route.name.toLowerCase()
       ]
     },
 
     burgerClass() {
       return { 'selected': this.state.menuOpened }
+    },
+
+    layerShowClass() {
+      return { 'show': this.state.menuOpened }
+    },
+
+    mobileMenuTitle() {
+      return this.state.menuOpened ? 'Close' : this.$route.name
     }
   },
 
@@ -61,16 +77,25 @@ export default {
     }
   },
 
+  mounted() {
+    setTimeout(() => window.scrollTo(0, 0), 0)
+    this.recalcWindow()
+    window.addEventListener('resize', this.recalcWindow)
+  },
+
   methods: {
+    recalcWindow() {
+      this.state.showVideo = window.innerWidth > 768
+      setTimeout(() => {
+        this.state.videoEffect = window.innerWidth > 768
+      }, 0);
+    },
+
     // Toggle mobile menu
     toggleMenu(action) {
-      if(action === 'close') {
-        // Change state
-        this.state.menuOpened = false
-      } else {
-        // Change state
-        this.state.menuOpened = !this.state.menuOpened
-      }
+      const $body = document.body
+      this.state.menuOpened = action === 'close' ? false : !this.state.menuOpened
+      $body.style.overflowY = this.state.menuOpened === true ? 'hidden' : 'auto'
     }
   }
 }

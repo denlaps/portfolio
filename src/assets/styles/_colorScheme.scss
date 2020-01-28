@@ -120,7 +120,7 @@
     }
   }
 
-  &.backLayer::after {
+  .backLayer {
     @if($headBg != $goldColor) {
       // Other pages
       background: $color;
