@@ -3,5 +3,11 @@ export default {
   consoleStatus: true,
 
   showVideo: false,
-  videoEffect: false
+  videoEffect: false,
+
+  subtitle: {
+    active: false,
+    pages: ['Works', 'Skills'],
+    current: 0
+  }
 }

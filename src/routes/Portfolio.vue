@@ -134,6 +134,9 @@ export default {
   },
 
   mounted() {
+    // Enable subtitle for this page
+    this.state.subtitle.active = true
+    
     this.showAttach()
   },
 

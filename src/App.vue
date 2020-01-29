@@ -5,6 +5,14 @@
         <app-menu 
           className="desk" 
         />
+
+        <h2 
+          v-if="state.subtitle.active"
+          class="subTitle"
+        >
+          <span>{{ currSubtitle }}</span>
+          <button @click="toggleAttached">{{ nextSubTitle }}</button>  
+        </h2>
       </div>
     </header>
 
@@ -43,7 +51,8 @@ export default {
 
   data() {
     return {
-      state
+      state,
+      subtitle: state.subtitle
     }
   },
 
@@ -68,12 +77,26 @@ export default {
 
     mobileMenuTitle() {
       return this.state.menuOpened ? 'Close' : this.$route.name
+    },
+
+    currSubtitle() {
+      return this.subtitle.pages[this.subtitle.current]
+    },
+
+    nextSubTitle() {
+      return this.subtitle.pages[this.nextSubIndex]  
+    },
+
+    nextSubIndex() {
+      const lastPage = this.subtitle.current === this.subtitle.pages.length - 1
+      return lastPage ? 0 : this.subtitle.current + 1
     }
   },
 
   watch: {
-    $route() {
+    $route(to) {
       this.toggleMenu('close')
+      this.subtitle.active = to.name === 'Portfolio'
     }
   },
 
@@ -84,6 +107,10 @@ export default {
   },
 
   methods: {
+    toggleAttached() {
+      this.subtitle.current = this.nextSubIndex
+    },
+
     recalcWindow() {
       this.state.showVideo = window.innerWidth > 768
       setTimeout(() => {

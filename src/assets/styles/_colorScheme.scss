@@ -1,6 +1,14 @@
 @mixin newScheme($headBg, $color, $activeColor) {
   header {
     background: $headBg;
+
+    .subTitle {
+      color: $lightBlue;
+
+      button {
+        color: $lightBlue;
+      }
+    }
   }
 
   .mainMenu {
@@ -121,10 +129,12 @@
   }
 
   .backLayer {
-    @if($headBg != $goldColor) {
+    @if($headBg !=$goldColor) {
       // Other pages
       background: $color;
-    } @else {
+    }
+
+    @else {
       // Last page
       background: $headBg;
     }

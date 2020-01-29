@@ -241,6 +241,8 @@ export default {
         display: inline-block;
         width: 100%;
         height: 100%;
+        min-height: 100%;
+        min-width: 100%;
         max-width: 270px;
         object-fit: cover;
         object-position: center;

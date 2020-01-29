@@ -1,4 +1,5 @@
 @media (max-width: 480px) {
+  /* == [HOME] == */
   .delayedRect {
     margin: auto 5%; 
 
@@ -25,4 +26,97 @@
     margin: 0 auto 10px;
     width: 105%;
   }
+  /* //////////////// */
+
+  /* == [PORTFOLIO] == */
+  .mainMenu {
+    &__burger {
+      width: auto;
+      z-index: 5;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  #app {
+    overflow: unset;
+  }
+
+  header {
+    z-index: 3;
+
+    .subTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: $headerHeight;
+      width: 100%;
+      padding-left: 30px;
+      font-family: 'Montserrat';
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
+      font-size: 22px;
+      margin-left: 84px;
+      position: relative;
+
+      button {
+        line-height: 1;
+        padding: 20px 20px 16px;
+        font-size: 18px;
+        font-family: 'Arial';
+
+        &::after {
+          content: ' >';
+        }
+      }
+    }
+  }
+
+  main {
+    .container {
+      section {
+        width: 100%;
+        visibility: hidden;
+      }
+
+      .attachedBlock {
+        top: $headerHeight;
+        z-index: 2;
+        transform: none;
+        transition: none;
+
+        @keyframes attachBlock {
+          from {
+            transform: scale(0.90) translateX(100%) translateY(-2%)
+          }
+
+          40% {
+            transform: scale(0.90) translateX(0) translateY(-2%)
+          }
+
+          100% {
+            transform: scale(1) translateX(0) translateY(0)
+          }
+        }
+
+        &.show {
+          visibility: visible;
+          animation-name: attachBlock;
+          animation-iteration-count: 1;
+          animation-duration: 1s;
+        }
+
+        &__head {
+          display: none;
+        }
+
+        .wrapper {
+          overflow: unset;
+        }
+      }
+    }
+  }
+
+  /* ///////////////// */
 }
