@@ -2,6 +2,7 @@
   <div class="container">
     <section 
       class="skills"
+      :class="showSkills"
       :style="{ overflowY: addScroll }"
     >
       <figure class="skills__item">
@@ -70,7 +71,7 @@
     </section>
     <section 
       class="works attachedBlock"
-      :class="attachClass"
+      :class="showWorks"
     >
       <h2 class="attachedBlock__head">Works</h2>
       <div class="wrapper">
@@ -117,7 +118,7 @@ import state from '../appState'
 export default {
   data() {
     return {
-      attachStatus: false,
+      workActive: false,
       addScroll: 'unset',
 
       state
@@ -125,32 +126,53 @@ export default {
   },
 
   computed: {
-    attachClass() {
+    showSkills() {
       return { 
-        'show': this.attachStatus,
+        'show': !this.workActive && !state.firstLoad,
+        'hide': this.workActive && !state.firstLoad,
+        'low-layer': this.state.menuOpened 
+      }
+    },
+
+    showWorks() {
+      return { 
+        'show': this.workActive,
+        'hide': !this.workActive && !state.firstLoad,
         'low-layer': this.state.menuOpened
       }
+    },
+  },
+
+  watch: {
+    'state.subtitle.current': function(tabIndex) {
+      this.workActive = tabIndex === 0
+      this.state.firstLoad = false
     }
   },
 
   mounted() {
     // Enable subtitle for this page
     this.state.subtitle.active = true
-    
     this.showAttach()
+
+    this.state.firstLoad = true;
   },
 
   // // Hide attached block when leave route
-  // beforeRouteLeave(to, from, next) {
-  //   const $block = document.querySelector('.attachedBlock')
-  //   $block.classList.remove('show')
-  //   setTimeout(next, 370)
-  // },
+  beforeRouteLeave(to, from, next) {
+    // const $block = document.querySelector('.attachedBlock')
+    // $block.classList.remove('show')
+    // setTimeout(next, 370)
+
+    this.state.firstLoad = true;
+
+    next();
+  },
 
   methods: {
     showAttach() {
       setTimeout(() => {
-        this.attachStatus = true
+        this.workActive = true
 
         // wait for transition ending => then show scroll
         setTimeout(() => {
@@ -163,55 +185,57 @@ export default {
 </script>
 
 <style lang="scss">
-  .skills {
-    padding: 40px;
+  main {
+    .skills {
+      padding: 40px;
 
-    &__item {
-      display: flex;
-      color: $lightBlue;
-    }
-  }
-
-  .works {
-    &__item {
-      position: relative;
-      display: flex;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: contain;
-        transition: transform $trDelay;
-      }
-
-      figcaption {
+      &__item {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, .77);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        color: #fff;
-        font-family: 'Montserrat';
-        font-size: 22px;
-        cursor: pointer;
-        opacity: 0;
-        transition: opacity $trDelay;
+        color: $lightBlue;
       }
+    }
 
-      &:hover {
+    .works {
+      &__item {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+
         img {
-          transform: scale(1.1);
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          transition: transform $trDelay;
         }
 
         figcaption {
-          opacity: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 0, 0, .77);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          color: #fff;
+          font-family: 'Montserrat';
+          font-size: 22px;
+          cursor: pointer;
+          opacity: 0;
+          transition: opacity $trDelay;
+        }
+
+        &:hover {
+          img {
+            transform: scale(1.1);
+          }
+
+          figcaption {
+            opacity: 1;
+          }
         }
       }
     }

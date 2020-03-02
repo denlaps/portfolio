@@ -119,6 +119,7 @@ main {
   padding-top: $headerHeight;
   flex: 1;
   transition: background-color $trDelay;
+  overflow-x: hidden;
 
   .container {
     display: flex;
@@ -130,7 +131,6 @@ main {
     }
 
     .attachedBlock {
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -139,6 +139,7 @@ main {
       z-index: 4;
       transform: translateX(100%);
       transition: transform 400ms;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
 
       &__head {
         display: flex;

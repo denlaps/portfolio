@@ -5,6 +5,8 @@ export default {
   showVideo: false,
   videoEffect: false,
 
+
+  firstLoad: true,
   subtitle: {
     active: false,
     pages: ['Works', 'Skills'],

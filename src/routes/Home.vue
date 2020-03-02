@@ -9,6 +9,8 @@
     >
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
+    <img v-else class="noVideoLayer" src="../assets/photos/no_video.jpg">
+
     <div class="overlay">
       <figure class="delayedRect">
         <div 
@@ -148,8 +150,8 @@ export default {
 
 <style lang="scss">
   main {
-    video {
-      position: absolute;
+    video, .noVideoLayer {
+      position: fixed;
       left: 0;
       top: 0;
       width: 100vw;
@@ -157,9 +159,12 @@ export default {
       z-index: 1;
       object-fit: cover;
       object-position: center;
+    }
+
+    video {
       opacity: 0;
       transition: opacity 1s;
-
+      
       &.show {
         opacity: 1;
       }

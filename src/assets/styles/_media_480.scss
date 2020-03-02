@@ -40,9 +40,9 @@
     }
   }
 
-  #app {
-    overflow: unset;
-  }
+  // #app {
+  //   overflow: unset;
+  // }
 
   header {
     z-index: 3;
@@ -74,24 +74,42 @@
   }
 
   main {
+    background: #1c2125;
+    overflow-y: hidden;
+    padding: 0;
+    margin-top: 71px;
+    position: relative;
+
     .container {
-      section {
-        width: 100%;
-        visibility: hidden;
+      .attachedBlock {
+        position: absolute;
+
+        &__head {
+          display: none;
+        }
       }
 
-      .attachedBlock {
-        top: $headerHeight;
+      section {
+        background: #2A343D;
+        width: 100%;
+        visibility: hidden;
+        transform: scale(1) translateX(100%) translateY(0);
         z-index: 2;
         transform: none;
         transition: none;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
 
         @keyframes attachBlock {
           from {
+            visibility: hidden;
+            transform: scale(1) translateX(100%) translateY(0)
+          }
+
+          30% {
             transform: scale(0.90) translateX(100%) translateY(-2%)
           }
 
-          40% {
+          60% {
             transform: scale(0.90) translateX(0) translateY(-2%)
           }
 
@@ -107,12 +125,38 @@
           animation-duration: 1s;
         }
 
-        &__head {
-          display: none;
+        @keyframes detachBlock {
+          from {
+            visibility: visible;
+            transform: scale(1) translateX(0) translateY(0)
+          }
+
+          30% {
+            transform: scale(0.90) translateX(0) translateY(-2%)
+          }
+
+          60% {
+            transform: scale(0.90) translateX(-100%) translateY(-2%)
+          }
+
+          100% {
+            transform: scale(1) translateX(-100%) translateY(0)
+          }
+        }
+
+        &.hide {
+          visibility: hidden;
+          animation-name: detachBlock;
+          animation-iteration-count: 1;
+          animation-duration: 1s;
         }
 
         .wrapper {
           overflow: unset;
+        }
+
+        &.skills {
+          position: relative;
         }
       }
     }
