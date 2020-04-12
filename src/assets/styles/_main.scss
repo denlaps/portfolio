@@ -11,6 +11,11 @@ button {
   outline: none;
 }
 
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
 html,
 body {
   font-family: 'Roboto';
@@ -126,6 +131,7 @@ main {
     width: 100%;
 
     section {
+      position: absolute;
       width: 50%;
       height: 100%;
     }
@@ -137,7 +143,7 @@ main {
       top: 0;
       right: 0;
       z-index: 4;
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
       transition: transform 400ms;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
 
@@ -162,8 +168,83 @@ main {
         overflow-y: auto;
       }
 
+      &.sticked {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .infoPanel {
+      background: #2A343D;
+      color: $lightBlue;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      transform: translate3d(-101%, 0, 0);
+      transition: transform 400ms;
+      will-change: transform;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
+
+      &__head {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          background: #D8FFFF;
+          position: relative;
+          display: flex;
+          align-items: center;
+          top: 0;
+          right: 0;
+          color: #1D2138;
+          height: $headerHeight;
+          padding: 0 60px 0 40px;
+          font-size: 22px;
+          font-weight: bold;
+          font-family: "Montserrat";
+          transition: background-color 300ms ease-in-out;
+
+          .arrow {
+            margin-top: 2px;
+            margin-right: 15px;
+            transform: rotate(180deg);
+            transition: transform 300ms ease-in-out;
+          }
+
+          &:hover {
+            background-color: #fff;
+
+            .arrow {
+              transform: rotate(180deg) translate3d(5px, 0, 0);
+            }
+          }
+        }
+      }
+
+      &__info {
+        margin-top: 10px;
+        padding: 40px;
+        line-height: 1.5;
+        font-size: 18px;
+
+        h2 {
+          font-size: 28px;
+          margin-bottom: 20px;
+        }
+      }
+
+      &__meta {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__text {
+        margin-top: 20px;
+      }
+
       &.show {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
       }
     }
   }

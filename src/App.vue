@@ -62,8 +62,11 @@ export default {
 
   computed: {
     pageClass() {
+      const path = this.$route.path
+      const classId = path === '/' ? 'home' : path.replace('/', '')
+
       return [
-        'page__' + this.$route.name.toLowerCase()
+        'page__' + classId
       ]
     },
 
@@ -96,7 +99,7 @@ export default {
   watch: {
     $route(to) {
       this.toggleMenu('close')
-      this.subtitle.active = to.name === 'Portfolio'
+      this.subtitle.active = to.path === '/portfolio'
     }
   },
 
