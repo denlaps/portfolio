@@ -5,24 +5,27 @@
       :class="showSkills"
       :style="{ overflowY: addScroll }"
     >
-      <h2>Skills</h2>
-      <figure 
-        v-for="(skill, s_key) in skillsList" 
-        :key="s_key" 
-        class="skills__item"
-      >
-        <i class="icon">
-          <svg width="100%" height="100%">
-            <use :xlink:href="getSkillSVG(skill.name)" overflow="visible" />
-          </svg>
-        </i>
-        <figcaption>
-          <span>{{ skill.title }}</span>
-          <u class="skills__line">
-            <hr :style="{ 'width': skill.level + '%' }">
-          </u>
-        </figcaption>
-      </figure>
+      <div class="wrapper">
+        <h2>Skills</h2>
+        <figure 
+          v-for="(skill, s_key) in skillsList" 
+          :key="s_key" 
+          class="skills__item"
+        >
+          <i class="icon">
+            <svg width="100%" height="100%">
+              <use :xlink:href="getSkillSVG(skill.name)" overflow="visible" />
+            </svg>
+          </i>
+          <figcaption>
+            <span>{{ skill.title }}</span>
+            <u class="skills__line">
+              <hr :style="{ 'width': skill.level + '%' }">
+            </u>
+          </figcaption>
+        </figure>
+        <span>* calculated based on frequency of use in projects</span>
+      </div>
     </section>
     <section 
       class="works changeTab attachedBlock"
@@ -54,13 +57,29 @@
         </button>
       </div>
       <div v-if="infoPanel" class="infoPanel__info">
-        <h2>{{ cutUrl(infoPanel.url) }}</h2>
+        <h3>{{ infoPanelHead }}</h3>
         <p v-if="!metaEmpty" class="infoPanel__meta">
-          <span v-if="infoPanel.meta.employer"><u>Employer</u>: {{ infoPanel.meta.employer }}</span>
-          <span v-if="infoPanel.meta.year"><u>Year</u>: {{ infoPanel.meta.year }}</span>
-          <span><u>Technologies</u>: {{ infoPanel.meta.tech }}</span>
+          <span v-if="infoPanel.meta.employer"><b>Employer</b>: {{ infoPanel.meta.employer }}</span>
+          <span v-if="infoPanel.meta.year"><b>Year</b>: {{ infoPanel.meta.year }}</span>
+          <span><b>Technologies</b>: 
+            <i
+              v-for="(tech, t_index) in infoTechList"
+              :key="t_index"
+              class="infoPanel__tags"
+            >
+              {{ tech }}
+            </i>
+          </span>
         </p>
         <p class="infoPanel__text">{{ infoPanel.description }}</p>
+        <p class="infoPanel__btns">
+          <a class="btnDefault" v-if="infoPanel.demo" :href="infoPanel.demo" target="_blank">
+            <i class="icon">
+              <svg width="100%" height="100%" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path></svg>
+            </i>
+            Demo
+          </a>
+        </p>
       </div>
     </section>
   </div>
@@ -85,6 +104,16 @@ export default {
   },
 
   computed: {
+    infoPanelHead() {
+      return this.infoPanel.url ? this.cutUrl(this.infoPanel.url) : this.infoPanel.title
+    },
+
+    infoTechList() {
+      return this.infoPanel.meta.tech.map((tech) => {
+        return this.skills.find(skill => skill.name === tech).title
+      });
+    },
+
     showPanel() {
       return this.currentPanel !== null
     },
@@ -135,6 +164,7 @@ export default {
   watch: {
     'showPanel': function(showed) {
       setTimeout(() => {
+        document.body.style.overflowY = showed ? 'hidden' : 'auto';
         this.movePanel = showed
       }, 0);
     },
@@ -146,7 +176,7 @@ export default {
 
   mounted() {
     // Sort works by year
-    this.works.sort((a, b) => a.meta.year - b.meta.year)
+    this.works.sort((a, b) => b.meta.year - a.meta.year)
     
     // Enable subtitle for this page
     this.state.subtitle.active = true
@@ -174,7 +204,7 @@ export default {
 
     cutUrl(url) {
       if(!url) {
-        return false;
+        return;
       }
       
       url = url.replace('https://', '').replace('http://', '')
@@ -210,6 +240,19 @@ export default {
     .skills {
       height: calc(100% - 71px) !important;
       padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      color: $lightBlue;
+
+      .wrapper {
+        width: 100%;
+        max-width: 90%;
+
+        & > span {
+          display: block;
+          margin: 40px 0;
+        }
+      }
 
       h2 {
         font-family: "Montserrat";
@@ -254,6 +297,7 @@ export default {
         position: relative;
         display: flex;
         overflow: hidden;
+        max-height: 400px;
 
         img {
           width: 100%;
@@ -276,7 +320,7 @@ export default {
           height: 100%;
           color: #fff;
           font-family: 'Montserrat', Verdana;
-          font-size: 25px;
+          font-size: 1em;
           cursor: pointer;
           opacity: 0;
           transition: opacity $trDelay;
@@ -284,6 +328,17 @@ export default {
           i {
             margin-top: 15px;
             font-size: 36px;
+          }
+
+          h3 {
+            padding: 0 20px;
+            text-align: center;
+          }
+
+          span {
+            display: block;
+            padding: 0 10px;
+            text-align: center;
           }
         }
 

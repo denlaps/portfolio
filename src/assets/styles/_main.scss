@@ -11,6 +11,35 @@ button {
   outline: none;
 }
 
+.btnDefault {
+  background-color: $lightBlue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1D2138;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Roboto";
+  padding: 15px;
+  margin-top: 40px;
+  transition: $trDelay ease-in-out;
+  flex-basis: 250px;
+
+  &:hover {
+    background-color: #fff;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+
+    svg {
+      vertical-align: top;
+    }
+  }
+}
+
 a {
   text-decoration: none;
   color: currentColor;
@@ -184,6 +213,8 @@ main {
       transition: transform 400ms;
       will-change: transform;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
+      height: 100vh;
+      overflow: auto;
 
       &__head {
         width: 100%;
@@ -228,19 +259,42 @@ main {
         line-height: 1.5;
         font-size: 18px;
 
-        h2 {
+        h3 {
           font-size: 28px;
           margin-bottom: 20px;
         }
       }
 
+      &__btns {
+        display: flex;
+      }
+
       &__meta {
         display: flex;
         flex-direction: column;
+        font-family: 'Roboto Light', Arial;
+
+        & > span {
+          font-size: 20px;
+        }
+      }
+
+      &__tags {
+        background-color: $lightBlue;
+        border-radius: 7px;
+        padding: 4px 8px;
+        color: #2a343d;
+        margin: 0 4px 10px;
+        font-style: normal;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
       }
 
       &__text {
         margin-top: 20px;
+        color: #fff380;
+        font-size: 20px;
       }
 
       &.show {

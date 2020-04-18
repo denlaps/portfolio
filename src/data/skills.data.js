@@ -51,4 +51,8 @@ export default [
     title: 'Sass (SCSS)',
     name: 'sass'
   },
+  {
+    title: 'Email (HTML Table)',
+    name: 'email'
+  },
 ]
