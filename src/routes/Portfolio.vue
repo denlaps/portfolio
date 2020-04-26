@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container attachPage">
     <section 
       class="skills changeTab"
       :class="showSkills"
-      :style="{ overflowY: addScroll }"
+      :style="{ overflowY: addScroll}"
     >
       <div class="wrapper">
-        <h2>Skills</h2>
+        <h2>Знания</h2>
+        <span>рассчитываются исходя из частоты использования в проектах</span>
         <figure 
           v-for="(skill, s_key) in skillsList" 
           :key="s_key" 
@@ -24,14 +25,18 @@
             </u>
           </figcaption>
         </figure>
-        <span>* calculated based on frequency of use in projects</span>
       </div>
     </section>
     <section 
       class="works changeTab attachedBlock"
       :class="showWorks"
     >
-      <h2 class="attachedBlock__head">Works</h2>
+      <h2 class="attachedBlock__head">
+        <div>
+          Работы
+          <span>[{{ works.length }}]</span>
+        </div>
+      </h2>
       <div class="wrapper">
         <figure 
           v-for="(work, w_key) in works" 
@@ -53,15 +58,15 @@
       <div class="infoPanel__head">
         <button @click="closePanel">
           <i class="arrow"><svg width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M39.7071 8.70711C40.0976 8.31659 40.0976 7.68342 39.7071 7.2929L33.3431 0.928935C32.9526 0.538411 32.3195 0.538411 31.9289 0.928935C31.5384 1.31946 31.5384 1.95262 31.9289 2.34315L37.5858 8L31.9289 13.6569C31.5384 14.0474 31.5384 14.6805 31.9289 15.0711C32.3195 15.4616 32.9526 15.4616 33.3431 15.0711L39.7071 8.70711ZM-8.74228e-08 9L39 9L39 7L8.74228e-08 7L-8.74228e-08 9Z" fill="#1D2138"></path></svg></i>
-          <span>Back</span>
+          <span>Назад</span>
         </button>
       </div>
       <div v-if="infoPanel" class="infoPanel__info">
         <h3>{{ infoPanelHead }}</h3>
         <p v-if="!metaEmpty" class="infoPanel__meta">
-          <span v-if="infoPanel.meta.employer"><b>Employer</b>: {{ infoPanel.meta.employer }}</span>
-          <span v-if="infoPanel.meta.year"><b>Year</b>: {{ infoPanel.meta.year }}</span>
-          <span><b>Technologies</b>: 
+          <span v-if="infoPanel.meta.employer"><b>Заказчик</b>: {{ infoPanel.meta.employer }}</span>
+          <span v-if="infoPanel.meta.year"><b>Год</b>: {{ infoPanel.meta.year }}</span>
+          <span><b>Технологии</b>: 
             <i
               v-for="(tech, t_index) in infoTechList"
               :key="t_index"
@@ -77,7 +82,13 @@
             <i class="icon">
               <svg width="100%" height="100%" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path></svg>
             </i>
-            Demo
+            Демо
+          </a>
+          <a class="btnDefault" v-if="infoPanel.github" :href="infoPanel.github" target="_blank">
+            <i class="icon">
+              <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" class="svg-inline--fa fa-github fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+            </i>
+            на GitHub
           </a>
         </p>
       </div>
@@ -96,6 +107,8 @@ export default {
       blockAttached: false,
       workActive: false,
       addScroll: 'unset',
+      displayWorks: 'flex',
+      displaySkills: 'flex',
       currentPanel: null,
       movePanel: false,
 
@@ -110,8 +123,9 @@ export default {
 
     infoTechList() {
       return this.infoPanel.meta.tech.map((tech) => {
-        return this.skills.find(skill => skill.name === tech).title
-      });
+        const skill = this.skills.find(skill => skill.name === tech);
+        return skill ? skill.title : null;
+      }).filter(skill => skill);
     },
 
     showPanel() {
@@ -130,7 +144,8 @@ export default {
       return { 
         'show': !this.workActive && !state.firstLoad,
         'hide': this.workActive && !state.firstLoad,
-        'low-layer': this.state.menuOpened 
+        'low-layer': this.state.menuOpened,
+        'undisplayed': !this.displaySkills
       }
     },
 
@@ -139,7 +154,8 @@ export default {
         'sticked': this.blockAttached, // Attach on desk
         'show': this.workActive, // Show curr tab on mobile
         'hide': !this.workActive && !state.firstLoad, // Hide prev tab on mobile
-        'low-layer': this.state.menuOpened // Change block pos if menu opened
+        'low-layer': this.state.menuOpened, // Change block pos if menu opened
+        'undisplayed': !this.displayWorks
       }
     },
 
@@ -162,6 +178,15 @@ export default {
   },
 
   watch: {
+    'workActive': function(workShowed) {
+      // this.displayWorks = workShowed;
+
+      setTimeout(() => {
+        // this.displaySkills = !workShowed;
+        // this.displayWorks = !workShowed;
+        this.displayWorks = workShowed;
+      }, 1000);
+    },
     'showPanel': function(showed) {
       setTimeout(() => {
         document.body.style.overflowY = showed ? 'hidden' : 'auto';
@@ -250,16 +275,18 @@ export default {
 
         & > span {
           display: block;
-          margin: 40px 0;
+          color: rgba(216, 255, 255, 0.2);
+          margin-bottom: 30px;
+        }
+        
+        h2 {
+          font-family: "Montserrat";
+          font-size: 28px;
+          margin-bottom: 0px;
         }
       }
 
-      h2 {
-        font-family: "Montserrat";
-        font-size: 28px;
-        margin-bottom: 20px;
-        margin-left: 50px;
-      }
+      
 
       &__item {
         width: 100%;
@@ -297,13 +324,14 @@ export default {
         position: relative;
         display: flex;
         overflow: hidden;
-        max-height: 400px;
+        height: 30vw;
+        margin-bottom: 10px;
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center;
+          object-position: top center;
           transition: transform $trDelay;
         }
 

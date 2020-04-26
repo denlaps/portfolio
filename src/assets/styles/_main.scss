@@ -20,8 +20,9 @@ button {
   font-size: 22px;
   font-weight: bold;
   font-family: "Roboto";
-  padding: 15px;
-  margin-top: 40px;
+  padding: 15px 20px;
+  margin: 20px 20px 0 0;
+  white-space: nowrap;
   transition: $trDelay ease-in-out;
   flex-basis: 250px;
 
@@ -36,6 +37,47 @@ button {
 
     svg {
       vertical-align: top;
+    }
+  }
+}
+
+.nextButton {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+  button {
+    background: #D8FFFF;
+    height: 53px;
+    flex: 1;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 27px;
+    color: #1D2138;
+    margin-right: 10px;
+    transition: background-color $trDelay;
+
+    &:hover {
+      background: $changedArrow;
+    }
+  }
+
+  .arrow {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform $trDelay;
+  }
+
+  &:hover {
+    .arrow {
+      transform: translateX(5px);
+
+      path {
+        fill: $changedArrow;
+      }
     }
   }
 }
@@ -158,13 +200,18 @@ main {
   .container {
     display: flex;
     width: 100%;
+  }
 
+  section {
+    width: 50%;
+    height: 100%;
+  }
+
+  .attachPage {
     section {
       position: absolute;
-      width: 50%;
-      height: 100%;
     }
-
+    
     .attachedBlock {
       display: flex;
       flex-direction: column;
@@ -184,6 +231,13 @@ main {
         padding: 0 30px;
         font-family: 'Montserrat';
         font-size: 28px;
+
+        span {
+          font-weight: normal;
+          font-size: 20px;
+          display: inline-block;
+          font-family: 'Roboto';
+        }
       }
 
       &.low-layer {
@@ -267,6 +321,7 @@ main {
 
       &__btns {
         display: flex;
+        flex-wrap: wrap;
       }
 
       &__meta {
@@ -293,6 +348,7 @@ main {
 
       &__text {
         margin-top: 20px;
+        margin-bottom: 20px;
         color: #fff380;
         font-size: 20px;
       }

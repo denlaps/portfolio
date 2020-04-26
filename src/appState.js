@@ -9,7 +9,8 @@ export default {
   firstLoad: true,
   subtitle: {
     active: false,
-    pages: ['Works', 'Skills'],
-    current: 0
+    pages: ['Работы', 'Знания'],
+    current: 0,
+    blocked: false
   }
 }

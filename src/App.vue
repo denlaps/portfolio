@@ -79,7 +79,7 @@ export default {
     },
 
     mobileMenuTitle() {
-      return this.state.menuOpened ? 'Close' : this.$route.name
+      return this.state.menuOpened ? 'Закрыть' : this.$route.name
     },
 
     currSubtitle() {
@@ -111,7 +111,14 @@ export default {
 
   methods: {
     toggleAttached() {
-      this.subtitle.current = this.nextSubIndex
+      if(this.subtitle.blocked) return;
+
+      this.subtitle.current = this.nextSubIndex;
+      this.subtitle.blocked = true;
+      
+      setTimeout(() => {
+        this.subtitle.blocked = false;
+      }, 1000);
     },
 
     recalcWindow() {

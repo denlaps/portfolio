@@ -1,8 +1,96 @@
 export default [
   {
+    title: 'Мое портфолио',
+    url: 'https://denlaps.com',
+    github: 'https://github.com/denlaps/',
+    img: require('../assets/photos/portfolio.jpg'),
+    meta: {
+      year: 2020,
+      tech: ['html5', 'css3', 'js', 'vuejs', 'figma', 'sass', 'bem']
+    },
+    description: `
+      Разработка собственного одностраничного сайта-портфолио на Vue.js.
+    `,
+  },
+  {
+    title: 'Тестовое задание от SkyNet',
+    url: '',
+    github: '',
+    demo: '/sites/skynet_test/',
+    img: require('../assets/photos/skynet_test.jpg'),
+    meta: {
+      employer: 'SkyNet',
+      year: 2020,
+      tech: ['html5', 'css3', 'js', 'vuejs', 'bem']
+    },
+    description: `
+      Разработка интерфейса для выбора тарифов на Vue.js по тестовому заданию от SkyNet без использования Vue CLI. Необходимо было получить JSON-объект, затем создать адаптивное одностраничное приложение, состоящее из 3-х этапов, отсортировать тарифы в определенном порядке, вывести минимальную и максимальную цену из второго шага для каждого тарифного плана, расчитать выгоду для каждого отдельного тарифа.
+    `,
+  },
+  {
+    title: 'Интерфейс парсинга акций для генератора рассылки',
+    url: '',
+    github: 'https://github.com/denlaps/',
+    demo: '/sites/letterGen/',
+    img: require('../assets/photos/saturn_letterGen.jpg'),
+    meta: {
+      employer: 'Сатурн Строймаркет',
+      year: 2020,
+      tech: ['html5', 'css3', 'js', 'vuejs', 'bem']
+    },
+    description: `
+      Создание одностраничного интерфейса c использованием Materialize.css для сбора акций в один JSON-файл и последующего использования в генераторе рассылки на Node.js. Пользователь выбирает города, участвующие в рассылке, затем акции парсятся из соответствующего раздела на сайте в каждом отдельном регионе, сортируются, объединяются по общему признаку и в упорядоченном виде отображаются для выбора на втором шаге. После выбора акций, участвующих в рассылке, они снова разделяются по регионам и отдаются в виде JSON-файла.
+    `,
+  },
+  {
+    title: 'Генератор рассылки на Node.js',
+    url: '',
+    github: '',
+    img: require('../assets/photos/saturn_mailParser.jpg'),
+    meta: {
+      employer: 'Сатурн Строймаркет',
+      year: 2020,
+      tech: ['js', 'nodejs']
+    },
+    description: `
+      Разработка генератора шаблонов на Node.js для оптимизации и ускорения процесса создания рассылки. Проблема: для запуска рассылки необходимо создать 24 HTML-письма. В каждом регионе зачастую отличаются акции и юр.лица. На создание всей рассылки уходит слишком много времени, т.к. необходимо собрать ссылки на акции с каждого региона вручную, скопировать нужное юр.лицо из специального xlsx файла, проставить utm-метки для всех ссылок и по-необходимости отредактировать дизайн самого шаблона.
+      Для решения этой проблемы был создан интерфейс для выбора и парсинга акций, участвующих в рассылке, и оформления их в отдельный JSON-файл.
+      Затем, из этого JSON-файла и XLSX-файла с юр.лицами по одному HTML-шаблону создаются готовые файлы писем для каждого региона.
+    `,
+  },
+  {
+    title: 'Модуль сравнения товаров',
+    url: '',
+    github: '',
+    demo: '/sites/saturn_compare/',
+    img: require('../assets/photos/saturn_compare.jpg'),
+    meta: {
+      employer: 'Сатурн Строймаркет',
+      year: 2020,
+      tech: ['html5', 'css3', 'js', 'vuejs', 'bem']
+    },
+    description: `
+      Создание модуля сравнения товаров для мобильной версии на Vue.js. При переключении слайдеров выводятся в табличном виде заранее подгруженные характеристики.
+    `,
+  },
+  {
+    title: 'Areal.tech',
+    url: '',
+    demo: '/sites/areal/',
+    img: require('../assets/photos/areal.jpg'),
+    meta: {
+      employer: 'Areal',
+      year: 2020,
+      tech: ['html5', 'css3', 'figma', 'bem', 'js']
+    },
+    description: `
+      Верстка адаптивной страницы с эффектом плавного последовательного появления блоков.
+    `,
+  },
+  {
     title: 'HTML-письмо для Areal',
     url: '',
-    demo: '/sites/html_areal/',
+    demo: '/sites/areal_mail/',
     img: require('../assets/photos/areal_mail.jpg'),
     meta: {
       employer: 'Areal',
@@ -10,13 +98,55 @@ export default [
       tech: ['figma', 'email']
     },
     description: `
-      Верстка кроссбраузерного адаптивного письма для Areal.tech
+      Верстка адаптивного HTML-письма
+    `,
+  },
+  {
+    title: 'Десктопная версия Frimis',
+    url: '',
+    demo: '/sites/frimis_desk/',
+    img: require('../assets/photos/frimis_desk.jpg'),
+    meta: {
+      employer: 'Frimis',
+      year: 2019,
+      tech: ['html5', 'css3', 'photoshop', 'gulp', 'sass', 'bem', 'jq']
+    },
+    description: `
+      Верстка десктопной версии интернет магазина Frimis.
+    `,
+  },
+  {
+    title: 'Мобильная версия Frimis',
+    url: '',
+    demo: '/sites/frimis_desk/',
+    img: require('../assets/photos/frimis_mob.jpg'),
+    meta: {
+      employer: 'Frimis',
+      year: 2019,
+      tech: ['html5', 'css3', 'photoshop', 'gulp', 'sass', 'bem', 'jq']
+    },
+    description: `
+      Верстка мобильной версии интернет магазина Frimis.
+    `,
+  },
+  {
+    title: 'Тестовое задание для Сатурна',
+    url: '',
+    demo: '/sites/test_saturn/',
+    img: require('../assets/photos/saturn_test_page.jpg'),
+    meta: {
+      employer: 'Сатурн Строймаркет',
+      year: 2019,
+      tech: ['html5', 'css3', 'photoshop', 'gulp', 'sass', 'bem']
+    },
+    description: `
+      Верстка адаптивной страницы для тестового задания с использованием flexbox и grid.
     `,
   },
   {
     title: 'Тестовое задание для IQ Option',
     url: '',
-    demo: '/sites/iqoption_email/',
+    demo: '/sites/iqoption_mail/',
     img: require('../assets/photos/iqoption_email.jpg'),
     meta: {
       employer: 'IQ Option',
@@ -25,6 +155,20 @@ export default [
     },
     description: `
       Табличная верстка письма по тестовому заданию от IQ Option.
+    `,
+  },
+  {
+    title: 'Франшиза Блогеры-дети',
+    url: 'https://франшиза.блогеры-дети.рф',
+    demo: '/sites/franchise_blogery/',
+    img: require('../assets/photos/fr_blogery.jpg'),
+    meta: {
+      employer: '5agency',
+      year: 2019,
+      tech: ['html5', 'css3', 'jq', 'photoshop', 'bem', 'gulp', 'sass']
+    },
+    description: `
+      Верстка адаптивного лэндинга с использованием Flexbox.
     `,
   },
   {
@@ -56,31 +200,17 @@ export default [
     `,
   },
   {
-    title: 'Франшиза Блогеры-дети',
-    url: 'https://франшиза.блогеры-дети.рф',
-    demo: '/sites/franchise_blogery/',
-    img: require('../assets/photos/fr_blogery.jpg'),
-    meta: {
-      employer: '5agency',
-      year: 2019,
-      tech: ['html5', 'css3', 'jq', 'photoshop', 'bem', 'gulp', 'sass']
-    },
-    description: `
-      Верстка адаптивного лэндинга с использованием Flexbox.
-    `,
-  },
-  {
-    title: 'Тестовое задание для Сатурна',
+    title: 'Франшиза Сели-Поели',
     url: '',
-    demo: '/sites/test_saturn/',
-    img: require('../assets/photos/saturn_test_page.jpg'),
+    demo: '/sites/franchise_blogery/',
+    img: require('../assets/photos/selipoeli.jpg'),
     meta: {
-      employer: 'Сатурн Строймаркет',
-      year: 2019,
-      tech: ['html5', 'css3', 'photoshop', 'gulp', 'sass', 'bem']
+      employer: 'Сели-Поели',
+      year: 2018,
+      tech: ['html5', 'css3', 'photoshop']
     },
     description: `
-      Верстка адаптивной страницы для тестового задания с использованием flexbox и grid.
+      Верстка десктопной и мобильной версии лэндинга для франшизы Сели-Поели.
     `,
   },
 ]

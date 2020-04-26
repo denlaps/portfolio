@@ -19,10 +19,10 @@ export default [
     title: 'Photoshop',
     name: 'photoshop'
   },
-  {
-    title: 'BEM',
-    name: 'bem'
-  },
+  // {
+  //   title: 'BEM',
+  //   name: 'bem'
+  // },
   {
     title: 'Node.js',
     name: 'nodejs'

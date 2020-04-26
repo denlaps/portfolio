@@ -1,4 +1,4 @@
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   /* == [HOME] == */
   .delayedRect {
     margin: auto 5%; 
@@ -78,7 +78,9 @@
 
     .container {
       padding-top: 71px;
-      
+    }
+    
+    .attachPage {
       section {
         height: auto !important;
       }
@@ -88,6 +90,10 @@
 
         &__head {
           display: none;
+        }
+
+        figure {
+          height: 250px;
         }
       }
 
@@ -123,11 +129,11 @@
           }
 
           30% {
-            transform: scale(0.90) translateX(100%) translateY(-2%)
+            transform: scale(0.88, 1) translateX(100%) translateY(4vh)
           }
 
           60% {
-            transform: scale(0.90) translateX(0) translateY(-2%)
+            transform: scale(0.88, 1) translateX(0) translateY(4vh)
           }
 
           100% {
@@ -136,6 +142,7 @@
         }
 
         &.show {
+          display: flex !important;
           visibility: visible;
           animation-name: attachBlock;
           animation-iteration-count: 1;
@@ -149,11 +156,11 @@
           }
 
           30% {
-            transform: scale(0.90) translateX(0) translateY(-2%)
+            transform: scale(0.88, 1) translateX(0) translateY(4vh)
           }
 
           60% {
-            transform: scale(0.90) translateX(-100%) translateY(-2%)
+            transform: scale(0.88, 1) translateX(-100%) translateY(4vh)
           }
 
           100% {
@@ -166,6 +173,10 @@
           animation-name: detachBlock;
           animation-iteration-count: 1;
           animation-duration: 1s;
+        }
+
+        &.undisplayed {
+          display: none;
         }
 
         .wrapper {

@@ -20,11 +20,11 @@
         <figcaption class="delayedRect__info" :style="bracketPos">
           <h1>
             <console-line />
-            My name is Denis.<br>
-            I'm — frontend-<br>
-            developer
+            Меня зовут Денис.<br>
+            Я — frontend-<br>
+            разработчик
           </h1>
-          <span>working on IT-projects more than 2 years</span>
+          <span>работаю в IT-сфере более 2-х лет</span>
         </figcaption>
         <div class="delayedRect__photo">
           <img src="../assets/photos/photo2.jpg" alt="">
@@ -33,7 +33,7 @@
               tag="button"
               to="/portfolio"
             >
-              Watch works
+              Мои работы
             </router-link>
             <i class="arrow">
               <svg width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -251,47 +251,6 @@ export default {
         max-width: 270px;
         object-fit: cover;
         object-position: center;
-      }
-
-      .nextButton {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-
-        button {
-          background: #D8FFFF;
-          height: 53px;
-          flex: 1;
-          font-family: 'Montserrat';
-          font-weight: bold;
-          font-size: 22px;
-          line-height: 27px;
-          color: #1D2138;
-          margin-right: 10px;
-          transition: background-color $trDelay;
-
-          &:hover {
-            background: $changedArrow;
-          }
-        }
-
-        .arrow {
-          width: 15%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform $trDelay;
-        }
-
-        &:hover {
-          .arrow {
-            transform: translateX(5px);
-
-            path {
-              fill: $changedArrow;
-            }
-          }
-        }
       }
     }
   }

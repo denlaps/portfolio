@@ -8,22 +8,22 @@ import Contacts from './routes/Contacts.vue'
 
 // Settings
 const routes = [{
-    name: 'Home',
+    name: 'Главная',
     path: '/',
     component: Home
   },
   {
-    name: 'Portfolio',
+    name: 'Портфолио',
     path: '/portfolio',
     component: Portfolio
   },
   {
-    name: 'About',
+    name: 'Обо мне',
     path: '/about',
     component: About
   },
   {
-    name: 'Contacts',
+    name: 'Контакты',
     path: '/contacts',
     component: Contacts
   }
