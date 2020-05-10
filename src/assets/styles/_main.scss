@@ -137,7 +137,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 4;
   opacity: 0;
   visibility: hidden;
 
@@ -273,7 +273,7 @@ main {
       &__head {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
 
         button {
           background: #D8FFFF;

@@ -8,7 +8,7 @@ export default [
     name: 'css3'
   },
   {
-    title: 'JavaScript',
+    title: 'Native JavaScript',
     name: 'js'
   },
   {

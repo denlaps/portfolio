@@ -282,7 +282,7 @@ export default {
         h2 {
           font-family: "Montserrat";
           font-size: 28px;
-          margin-bottom: 0px;
+          margin-top: 20px;
         }
       }
 

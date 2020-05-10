@@ -46,7 +46,7 @@ export default {
 
       .container {
         width: 100%;
-        max-width: 930px;
+        max-width: 1000px;
         flex-wrap: wrap;
         padding: 40px;
 
@@ -55,11 +55,12 @@ export default {
 
           &.about__info {
             flex: 1;
-            font-family: 'Roboto';
+            font-family: 'Roboto Light';
+            font-weight: normal;
             font-size: 20px;
             line-height: 23px;
             color: #D8FFFF;
-            margin-right: 40px;
+            margin-right: 80px;
             margin-bottom: 20px;
             
             u {

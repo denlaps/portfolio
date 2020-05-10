@@ -55,4 +55,17 @@
     }
   }
   /* /////////////////// */
+
+  /* == [CONTACTS] == */
+  .page__contacts {
+    main {
+      .container {
+        section {
+          &.form-block {
+            padding: 40px 20px;
+          }
+        }
+      }
+    }
+  }
 }

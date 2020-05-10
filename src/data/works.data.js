@@ -9,7 +9,7 @@ export default [
       tech: ['html5', 'css3', 'js', 'vuejs', 'figma', 'sass', 'bem']
     },
     description: `
-      Разработка собственного одностраничного сайта-портфолио на Vue.js.
+      Разработка собственного сайта-портфолио на Vue.js.
     `,
   },
   {

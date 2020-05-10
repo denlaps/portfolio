@@ -1,5 +1,8 @@
 <template>
-  <u class="consoleLine">{{ helloPrint }}</u>
+  <u
+    class="consoleLine"
+    :class="{ 'blinking': blinkStatus }"
+  >{{ helloPrint }}</u>
 </template>
 
 <script>
@@ -18,74 +21,81 @@ export default {
       ],
       helloPrint: '',
       helloArr: [],
-      nextMsg: []
+      nextMsg: [],
+      blinkStatus: true
     }
   },
 
   watch: {
     helloArr(newArr) {
-      this.helloPrint = newArr.join('')
+      this.helloPrint = newArr.join('');
     }
   },
 
   mounted() {
-    const index = this.getRandFrom(0, this.helloStack.length)
-    this.helloPrint = this.helloStack[index]
+    const index = this.getRandFrom(0, this.helloStack.length);
+    this.helloPrint = this.helloStack[index];
 
-    this.helloScript(3000)
+    this.helloScript(3000);
   },
 
   methods: {
     /* Gen random num in range */
     getRandFrom(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min
+      return Math.floor(Math.random() * (max - min)) + min;
     },
     
     /* Start changing word after MS delay */
     helloScript(startMS) {
-      this.helloArr = this.helloPrint.split('')
-      this.genNext()
+      this.helloArr = this.helloPrint.split('');
+      this.genNext();
 
       setTimeout(this.clearConsole, startMS);
     },
     
     /* Get new word from helloStack */
     genNext() {
-      const index = this.getRandFrom(0, this.helloStack.length)
-      this.nextMsg = this.helloStack[index].split('')
+      const index = this.getRandFrom(0, this.helloStack.length);
+      this.nextMsg = this.helloStack[index].split('');
     },
 
     /* Random delay on change symbol */
     typeDelay(cb) {
-      const RAND_MS = this.getRandFrom(100, 300)
-      setTimeout(cb, RAND_MS)
+      const RAND_MS = this.getRandFrom(50, 200);
+      setTimeout(cb, RAND_MS);
     },
 
     /* Delete symbol */
     clearConsole() {
+      this.blinkStatus = false;
+
       this.typeDelay(() => {
-        const regExp = new RegExp('^' + this.helloPrint)
-        const consoleMatch = this.nextMsg.join('').match(regExp)
-        const sameWord = consoleMatch ? consoleMatch[0] : null
-        const consoleEmpty = this.helloArr.length === 0
+        const regExp = new RegExp('^' + this.helloPrint.toLowerCase());
+        const consoleMatch = this.nextMsg.join('').match(regExp);
+        const sameWord = consoleMatch ? consoleMatch[0] : null;
+        const consoleEmpty = this.helloArr.length === 0;
 
         if(consoleEmpty || this.helloPrint === sameWord) {
-          this.nextMsg = this.nextMsg.join('').replace(regExp, '').split('')
-          this.pushToConsole()
+          this.nextMsg = this.nextMsg.join('').replace(regExp, '').split('');
+          this.blinkStatus = true;
+          this.pushToConsole();
         } else {
-          this.helloArr.pop()
-          this.clearConsole()
+          this.helloArr.pop();
+          this.clearConsole();
         }
       })
     },
 
     pushToConsole() {
+      this.blinkStatus = false;
+
       this.typeDelay(() => {
         if(this.nextMsg.length > 0) {
-          this.helloArr.push(this.nextMsg.shift())
-          this.pushToConsole()
+          this.helloArr.push(this.nextMsg.shift());
+          this.pushToConsole();
         } else {
-          this.helloScript(2000)
+          this.blinkStatus = true;
+          this.helloScript(2000);
         }
       })
     }
@@ -111,6 +121,14 @@ export default {
     white-space: nowrap;
     overflow: hidden;
 
+    &:before {
+      content: 'C:\\> '
+    }
+
+    &:after {
+      content: '█';
+    }
+
     @keyframes cursorBlinking {
       0% {
         content: ''
@@ -121,16 +139,13 @@ export default {
       }
     }
 
-    &:before {
-      content: 'C:\\> '
-    }
-
-    &:after {
-      content: '█';
-      animation-name: cursorBlinking;
-      animation-iteration-count: infinite;
-      animation-duration: 1s;
-      animation-timing-function: steps(2);
+    &.blinking {
+      &:after {
+        animation-name: cursorBlinking;
+        animation-iteration-count: infinite;
+        animation-duration: 800ms;
+        animation-timing-function: steps(2);
+      }
     }
   }
 </style>
