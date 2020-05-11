@@ -98,8 +98,6 @@
 
 <script>
 import state from '../appState'
-import works from '../../public/data/works.data'
-import skills from '../../public/data/skills.data'
 
 export default {
   data() {
@@ -111,8 +109,9 @@ export default {
       displaySkills: 'flex',
       currentPanel: null,
       movePanel: false,
-
-      state, works, skills
+      works: [],
+      skills: [],
+      state
     }
   },
 
@@ -133,7 +132,7 @@ export default {
     },
 
     infoPanel() {
-      return this.showPanel ? works[this.currentPanel] : null
+      return this.showPanel ? this.works[this.currentPanel] : null
     },
 
     metaEmpty() {
@@ -200,6 +199,8 @@ export default {
   },
 
   mounted() {
+    this.getData('skills');
+    this.getData('works');
     // Sort works by year
     this.works.sort((a, b) => b.meta.year - a.meta.year)
     
@@ -223,6 +224,16 @@ export default {
   },
 
   methods: {
+    getData(type) {
+      fetch(process.env.BASE_URL + `/data/${type}.data.json`)
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          this[type] = data;
+        })
+    },
+
     getSkillSVG(name) {
       return require('../assets/svg/techs.svg') + '#' + name
     },
