@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/src/data/map.settings.js
+/src/map.settings.js
 
 # local env files
 .env.local

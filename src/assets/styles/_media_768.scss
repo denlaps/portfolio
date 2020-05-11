@@ -51,6 +51,14 @@
       .container {
         flex-direction: column;
         align-items: center;
+
+        section {
+          &.about {
+            &__info {
+              margin-right: 0;
+            }
+          }
+        }
       }
     }
   }

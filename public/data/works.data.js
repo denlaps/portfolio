@@ -1,9 +1,11 @@
+const BASE_URL = process.env.BASE_URL
+
 export default [
   {
     title: 'Мое портфолио',
     url: 'https://denlaps.com',
     github: 'https://github.com/denlaps/',
-    img: require('../assets/photos/portfolio.jpg'),
+    img: `${BASE_URL}/photos/portfolio.jpg`,
     meta: {
       year: 2020,
       tech: ['html5', 'css3', 'js', 'vuejs', 'figma', 'sass', 'bem']
@@ -17,7 +19,7 @@ export default [
     url: '',
     github: '',
     demo: '/sites/skynet_test/',
-    img: require('../assets/photos/skynet_test.jpg'),
+    img: `${BASE_URL}/photos/skynet_test.jpg`,
     meta: {
       employer: 'SkyNet',
       year: 2020,
@@ -32,7 +34,7 @@ export default [
     url: '',
     github: 'https://github.com/denlaps/',
     demo: '/sites/letterGen/',
-    img: require('../assets/photos/saturn_letterGen.jpg'),
+    img: `${BASE_URL}/photos/saturn_letterGen.jpg`,
     meta: {
       employer: 'Сатурн Строймаркет',
       year: 2020,
@@ -46,7 +48,7 @@ export default [
     title: 'Генератор рассылки на Node.js',
     url: '',
     github: '',
-    img: require('../assets/photos/saturn_mailParser.jpg'),
+    img: `${BASE_URL}/photos/saturn_mailParser.jpg`,
     meta: {
       employer: 'Сатурн Строймаркет',
       year: 2020,
@@ -63,7 +65,7 @@ export default [
     url: '',
     github: '',
     demo: '/sites/saturn_compare/',
-    img: require('../assets/photos/saturn_compare.jpg'),
+    img: `${BASE_URL}/photos/saturn_compare.jpg`,
     meta: {
       employer: 'Сатурн Строймаркет',
       year: 2020,
@@ -77,7 +79,7 @@ export default [
     title: 'Areal.tech',
     url: '',
     demo: '/sites/areal/',
-    img: require('../assets/photos/areal.jpg'),
+    img: `${BASE_URL}/photos/areal.jpg`,
     meta: {
       employer: 'Areal',
       year: 2020,
@@ -91,7 +93,7 @@ export default [
     title: 'HTML-письмо для Areal',
     url: '',
     demo: '/sites/areal_mail/',
-    img: require('../assets/photos/areal_mail.jpg'),
+    img: `${BASE_URL}/photos/areal_mail.jpg`,
     meta: {
       employer: 'Areal',
       year: 2020,
@@ -105,7 +107,7 @@ export default [
     title: 'Десктопная версия Frimis',
     url: '',
     demo: '/sites/frimis_desk/',
-    img: require('../assets/photos/frimis_desk.jpg'),
+    img: `${BASE_URL}/photos/frimis_desk.jpg`,
     meta: {
       employer: 'Frimis',
       year: 2019,
@@ -119,7 +121,7 @@ export default [
     title: 'Мобильная версия Frimis',
     url: '',
     demo: '/sites/frimis_desk/',
-    img: require('../assets/photos/frimis_mob.jpg'),
+    img: `${BASE_URL}/photos/frimis_mob.jpg`,
     meta: {
       employer: 'Frimis',
       year: 2019,
@@ -133,7 +135,7 @@ export default [
     title: 'Тестовое задание для Сатурна',
     url: '',
     demo: '/sites/test_saturn/',
-    img: require('../assets/photos/saturn_test_page.jpg'),
+    img: `${BASE_URL}/photos/saturn_test_page.jpg`,
     meta: {
       employer: 'Сатурн Строймаркет',
       year: 2019,
@@ -147,7 +149,7 @@ export default [
     title: 'Тестовое задание для IQ Option',
     url: '',
     demo: '/sites/iqoption_mail/',
-    img: require('../assets/photos/iqoption_email.jpg'),
+    img: `${BASE_URL}/photos/iqoption_email.jpg`,
     meta: {
       employer: 'IQ Option',
       year: 2019,
@@ -161,7 +163,7 @@ export default [
     title: 'Франшиза Блогеры-дети',
     url: 'https://франшиза.блогеры-дети.рф',
     demo: '/sites/franchise_blogery/',
-    img: require('../assets/photos/fr_blogery.jpg'),
+    img: `${BASE_URL}/photos/fr_blogery.jpg`,
     meta: {
       employer: '5agency',
       year: 2019,
@@ -175,7 +177,7 @@ export default [
     title: 'Автомое',
     url: 'https://avtomoe43.ru',
     demo: '/sites/avtomoe/',
-    img: require('../assets/photos/avtomoe.jpg'),
+    img: `${BASE_URL}/photos/avtomoe.jpg`,
     meta: {
       employer: '5agency',
       year: 2019,
@@ -189,7 +191,7 @@ export default [
     title: 'Лагерь Блогеры-Дети',
     url: 'https://лагерь.блогеры-дети.рф',
     demo: '/sites/camp_blogery/',
-    img: require('../assets/photos/summercamp.jpg'),
+    img: `${BASE_URL}/photos/summercamp.jpg`,
     meta: {
       employer: '5agency',
       year: 2019,
@@ -203,7 +205,7 @@ export default [
     title: 'Франшиза Сели-Поели',
     url: '',
     demo: '/sites/franchise_blogery/',
-    img: require('../assets/photos/selipoeli.jpg'),
+    img: `${BASE_URL}/photos/selipoeli.jpg`,
     meta: {
       employer: 'Сели-Поели',
       year: 2018,

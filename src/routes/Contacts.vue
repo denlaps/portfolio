@@ -1,16 +1,17 @@
 <template>
   <div class="container">
     <section class="form-block">
-      <form action="">
+      <form ref="sendForm" action="">
         <h2>Свяжитесь со мной</h2>
         <section class="form-block__contacts">
           <a href="mailto:denlapt@gmail.com">denlapt@gmail.com</a><br>
           <a href="tel:+79536820612">+7(953)-682-06-12</a>
         </section>
-        <input type="text" placeholder="Ваше имя">
-        <input type="text" placeholder="Ваш email">
-        <textarea name="" id="" placeholder="Ваше сообщение"></textarea>
-        <button>Отправить</button>
+        <input type="text" name="name" placeholder="Ваше имя">
+        <input type="email" name="email" placeholder="Ваш email">
+        <textarea name="message" id="" placeholder="Ваше сообщение"></textarea>
+        <button ref="sendBtn">Отправить</button>
+        <p class="statusInfo" ref="sendStatus"></p>
       </form>
     </section>
     <section class="map-block" id="map">
@@ -221,11 +222,43 @@ export default {
   },
 
   mounted() {
-
+    this.$refs.sendForm.addEventListener('submit', this.sendData);
   },
 
   methods: {
+    onSuccess() {
+      this.$refs.sendForm.reset();
+      this.$refs.sendBtn.style = "display: none ";
+      this.$refs.sendStatus.innerHTML = "Спасибо :)";
+    },
 
+    onError() {
+      this.$refs.sendStatus.innerHTML = "Форма не отправилась! Попробуйте позже!";
+    },
+
+    sendData(ev) {
+      ev.preventDefault();
+      var data = new FormData(this.$refs.sendForm);
+      this.ajax(data, this.onSuccess, this.onError);
+    },
+
+    ajax(data, success, error) {
+      const method = 'POST';
+      const url = 'https://formspree.io/xnqgnvbr';
+      const xhr = new XMLHttpRequest();
+
+      xhr.open(method, url);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          success(xhr.response, xhr.responseType);
+        } else {
+          error(xhr.status, xhr.response, xhr.responseType);
+        }
+      };
+      xhr.send(data);
+    }
   }
 }
 </script>
@@ -254,7 +287,8 @@ export default {
             margin-bottom: 20px;
 
             a {
-              margin-bottom: 5px;
+              display: inline-block;
+              margin-bottom: 10px;
 
               &:hover {
                 text-decoration: underline;
@@ -275,7 +309,7 @@ export default {
               margin-bottom: 15px;
             }
 
-            input[type="text"], textarea {
+            input, textarea {
               background: #fff;
               opacity: 0.14;
               border: 0;
@@ -306,7 +340,7 @@ export default {
               }
             }
 
-            input[type="text"] {
+            input {
               text-indent: 13px;
               height: 51px;
               display: flex;
@@ -338,6 +372,12 @@ export default {
                 background: #fff;
                 box-shadow: 0px 2px 0px #828282;
               }
+            }
+
+            .statusInfo {
+              text-align: center;
+              padding: 20px;
+              font-size: 18px;
             }
           }
         }

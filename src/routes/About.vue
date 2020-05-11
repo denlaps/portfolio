@@ -15,7 +15,7 @@
       </p>
     </section>
     <section class="about__photo">
-      <img src="../assets/photos/photo1.jpg" alt="">
+      <img :src="getSrc('/photos/photo1.jpg')" alt="">
       <div class="nextButton">
         <router-link 
           tag="button"
@@ -35,6 +35,11 @@
 
 <script>
 export default {
+  methods: {
+    getSrc(url) {
+      return process.env.BASE_URL + url
+    }
+  }
 }
 </script>
 

@@ -98,8 +98,8 @@
 
 <script>
 import state from '../appState'
-import works from '../data/works.data'
-import skills from '../data/skills.data'
+import works from '../../public/data/works.data'
+import skills from '../../public/data/skills.data'
 
 export default {
   data() {

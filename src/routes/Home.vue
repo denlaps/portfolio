@@ -9,7 +9,7 @@
     >
       <source src="../assets/city.mp4" type="video/mp4">
     </video>
-    <img v-else class="noVideoLayer" src="../assets/photos/no_video.jpg">
+    <img v-else class="noVideoLayer" :src="getSrc('/photos/no_video.jpg')">
 
     <div class="overlay">
       <figure class="delayedRect">
@@ -27,7 +27,7 @@
           <span>работаю в IT-сфере более 2-х лет</span>
         </figcaption>
         <div class="delayedRect__photo">
-          <img src="../assets/photos/photo2.jpg" alt="">
+          <img :src="getSrc('/photos/photo2.jpg')" alt="">
           <div class="nextButton">
             <router-link 
               tag="button"
@@ -101,6 +101,10 @@ export default {
   },
 
   methods: {
+    getSrc(url) {
+      return process.env.BASE_URL + url
+    },
+
     initVideo() {
       if(window.innerWidth > 768) {
         this.state.showVideo = true
