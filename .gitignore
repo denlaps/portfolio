@@ -2,6 +2,7 @@
 node_modules
 /dist
 /src/map.settings.js
+/denlaps.github.io
 
 # local env files
 .env.local

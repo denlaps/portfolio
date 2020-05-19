@@ -1,8 +1,8 @@
 [
   {
-    "title": "Мое портфолио",
-    "url": "https://denlaps.com",
-    "github": "https://github.com/denlaps/",
+    "title": "Сайт-портфолио",
+    "url": "https://denlaps.github.io",
+    "github": "https://github.com/denlaps/portfolio",
     "img": "/photos/portfolio.jpg",
     "meta": {
       "year": 2020,

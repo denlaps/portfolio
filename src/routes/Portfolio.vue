@@ -3,10 +3,9 @@
     <section 
       class="skills changeTab"
       :class="showSkills"
-      :style="{ overflowY: addScroll}"
     >
       <div class="wrapper">
-        <h2>Знания</h2>
+        <h2>{{ state.subtitle.pages[1] }}</h2>
         <span>рассчитываются исходя из частоты использования в проектах</span>
         <figure 
           v-for="(skill, s_key) in skillsList" 
@@ -104,7 +103,7 @@ export default {
     return {
       blockAttached: false,
       workActive: false,
-      addScroll: 'unset',
+      addScroll: false,
       displayWorks: 'flex',
       displaySkills: 'flex',
       currentPanel: null,
@@ -144,7 +143,8 @@ export default {
         'show': !this.workActive && !state.firstLoad,
         'hide': this.workActive && !state.firstLoad,
         'low-layer': this.state.menuOpened,
-        'undisplayed': !this.displaySkills
+        'undisplayed': !this.displaySkills,
+        'add-scroll': this.addScroll
       }
     },
 
@@ -245,7 +245,7 @@ export default {
       
       url = url.replace('https://', '').replace('http://', '')
 
-      return url[0].toUpperCase() + url.slice(1)
+      return url
     },
 
     showAttach() {
@@ -255,7 +255,7 @@ export default {
 
         // wait for transition ending => then show scroll
         setTimeout(() => {
-          this.addScroll = 'auto'
+          this.addScroll = true
         }, 400)
       }, 300)
     },
@@ -279,6 +279,12 @@ export default {
       display: flex;
       justify-content: center;
       color: $lightBlue;
+      overflow-y: hidden;
+
+      &.add-scroll {
+        padding-right: 23px;
+        overflow-y: auto;
+      }
 
       .wrapper {
         width: 100%;
@@ -296,8 +302,6 @@ export default {
           margin-top: 20px;
         }
       }
-
-      
 
       &__item {
         width: 100%;

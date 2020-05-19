@@ -72,20 +72,26 @@
 
   /* == [PORTFOLIO] == */
   .page__portfolio {
+
     main {
       padding: 0;
       height: auto;
       background: #212b33;
       position: relative;
-      overflow: hidden !important;
 
       .container {
         padding-top: 71px;
       }
 
       .attachPage {
+        overflow-y: hidden;
+
         section {
           height: auto !important;
+
+          &.changeTab.skills {
+            height: auto !important;
+          }
         }
 
         .attachedBlock {

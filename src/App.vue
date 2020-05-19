@@ -112,7 +112,9 @@ export default {
   methods: {
     toggleAttached() {
       if(this.subtitle.blocked) return;
-
+      
+      window.scrollTo(0, 0);
+      
       this.subtitle.current = this.nextSubIndex;
       this.subtitle.blocked = true;
       

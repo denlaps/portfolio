@@ -9,7 +9,7 @@ export default {
   firstLoad: true,
   subtitle: {
     active: false,
-    pages: ['Работы', 'Знания'],
+    pages: ['Работы', 'Скиллы'],
     current: 0,
     blocked: false
   }
