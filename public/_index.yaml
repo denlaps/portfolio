@@ -1,0 +1,27 @@
+entries:
+  - name: sites_fs
+    kind: fs.directory
+    directory: ./sites
+
+  - name: sites_static
+    kind: http.static
+    meta:
+      server: gateway
+    path: /sites
+    fs: sites_fs
+    static_options:
+      index: index.html
+
+  - name: app_fs
+    kind: fs.directory
+    directory: .
+
+  - name: portfolio
+    kind: http.static
+    meta:
+      server: gateway
+    path: /
+    fs: app_fs
+    static_options:
+      spa: true
+      index: index.html

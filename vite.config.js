@@ -4,10 +4,38 @@ import { fileURLToPath, URL } from 'node:url'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const SITE_ROOT_RE = /^\/sites\/([^/]+)(?:\/?|\/index)$/
+const SITE_ROOT_RE = /^\/sites\/([^/]+)(?:\/?|\/index(?:\.html)?)$/
 
 function resolveSiteIndex(siteName, rootDir) {
   return path.join(rootDir, 'sites', siteName, 'index.html')
+}
+
+function listDemoSites(sitesDir) {
+  if (!fs.existsSync(sitesDir)) return []
+
+  return fs.readdirSync(sitesDir).filter((name) => {
+    const siteDir = path.join(sitesDir, name)
+    return fs.statSync(siteDir).isDirectory() &&
+      fs.existsSync(path.join(siteDir, 'index.html'))
+  })
+}
+
+function writeStaticWebAppConfig(distDir, sites) {
+  const routes = sites.flatMap((site) => [
+    { route: `/sites/${site}`, rewrite: `/sites/${site}/index.html` },
+    { route: `/sites/${site}/`, rewrite: `/sites/${site}/index.html` },
+    { route: `/sites/${site}/index`, rewrite: `/sites/${site}/index.html` }
+  ])
+
+  fs.writeFileSync(
+    path.join(distDir, 'staticwebapp.config.json'),
+    `${JSON.stringify({
+      routes,
+      navigationFallback: {
+        rewrite: '/index.html'
+      }
+    }, null, 2)}\n`
+  )
 }
 
 const staticSitesPlugin = {
@@ -37,18 +65,11 @@ const staticSitesPlugin = {
     })
   },
   closeBundle() {
-    const sitesDir = path.join(process.cwd(), 'dist', 'sites')
-    if (!fs.existsSync(sitesDir)) return
+    const distDir = path.join(process.cwd(), 'dist')
+    const sites = listDemoSites(path.join(distDir, 'sites'))
+    if (!sites.length) return
 
-    for (const siteName of fs.readdirSync(sitesDir)) {
-      const siteDir = path.join(sitesDir, siteName)
-      if (!fs.statSync(siteDir).isDirectory()) continue
-
-      const indexHtml = path.join(siteDir, 'index.html')
-      if (!fs.existsSync(indexHtml)) continue
-
-      fs.copyFileSync(indexHtml, path.join(siteDir, 'index'))
-    }
+    writeStaticWebAppConfig(distDir, sites)
   }
 }
 
