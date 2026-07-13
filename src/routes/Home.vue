@@ -3,11 +3,13 @@
     <video 
       v-if="state.showVideo" 
       :class="{ 'show': state.videoEffect }" 
-      id="videoBg" 
-      :src="backgroundVideo"
-      preload="auto"
+      id="videoBg"
+      preload="metadata"
       autoplay loop muted playsinline
-    />
+    >
+      <source :src="backgroundWebm" type="video/webm">
+      <source :src="backgroundMp4" type="video/mp4">
+    </video>
     <img v-else class="noVideoLayer" :src="getSrc('/photos/no_video.jpg')">
 
     <div class="overlay">
@@ -55,7 +57,8 @@
 import state from '../appState.js'
 import consoleLine from '../components/Console.vue'
 import { publicPath } from '../utils/publicPath.js'
-import backgroundVideo from '../assets/background.mp4'
+import backgroundWebm from '../assets/background.webm'
+import backgroundMp4 from '../assets/background.mp4'
 
 export default {
   data() {
@@ -71,7 +74,8 @@ export default {
       },
 
       state,
-      backgroundVideo
+      backgroundWebm,
+      backgroundMp4
     }
   },
 

@@ -4,6 +4,9 @@ node_modules
 /src/map.settings.js
 /denlaps.github.io
 
+# Raw video sources (keep only compressed web assets in repo)
+*.mov
+
 # local env files
 .env.local
 .env.*.local
