@@ -1,0 +1,284 @@
+.compareMain {
+  height: 100%;
+  max-height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.compareMain.appLoaded {
+  height: auto;
+  max-height: unset;
+  overflow: unset;
+}
+
+.compareMain::before {
+  content: '';
+  background: #fff url('./ajax-loader.gif') center center no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 300ms;
+  z-index: 3;
+}
+
+.compareMain.appLoaded::before {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.compareMain.loaderWrapper::before {
+  visibility: visible;
+}
+
+
+.page_header {
+  background: #fff;
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding: 15px;
+}
+
+.compareSlider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 57px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #fff;
+  z-index: 20;
+}
+
+.compareSlider a {
+  color: darkred;
+}
+
+.compareSlider__left,
+.compareSlider__right {
+  max-width: 50%;
+  text-align: center;
+}
+
+.compareGoodView__photo {
+  text-align: center;
+}
+
+.compareGoodView__photo img {
+  display: inline-block !important;
+}
+
+.compareCount {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0 20px;
+}
+
+.compareSimilar {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
+.compareSimilar .ui-checkbox .ui-btn-icon-left {
+  padding-left: 30px;
+  line-height: 1;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.compareSimilar .ui-btn-icon-left:after {
+  top: 0;
+  margin-top: 0;
+}
+
+.compareFeature {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid #dae0e8;
+}
+
+.compareFeature.notSame {
+  background: #f5f7fb;
+}
+
+.compareFeature h3 {
+  font-weight: 400;
+  font-size: 12px;
+  font-family: 'helveticaneuecyrmedium', 'helveticaneuecyrroman', Arial, Verdana;
+  text-transform: uppercase;
+  color: #8f8f8f;
+  margin-bottom: 0;
+}
+
+.compareFeature__item {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 10px 0;
+  font-size: 14px;
+}
+
+.compareFeature__item span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compareGoodView {
+  outline: none !important;
+  padding: 0 10px;
+}
+
+.comparePanel {
+  top: 0;
+  background: #fff;
+  z-index: 2;
+  transition: box-shadow 300ms;
+}
+
+.comparePanel.sticked {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+.comparePanel img {
+  transition: transform 300ms;
+}
+
+.comparePanel.minify img {
+  transform: scale(0.45);
+  margin: -35px -35px;
+}
+
+.comparePanel.minify .compareGoodView {
+  display: flex;
+  font-size: 13px;
+  text-align: left;
+}
+
+.comparePanel.minify .compareGoodView__name {
+  height: 71px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.comparePanel.minify .compareCount {
+  margin: 0;
+}
+
+.ui-state-disabled label {
+  color: #888;
+}
+
+.editCompareList {
+  margin-right: 15px;
+  z-index: 10;
+  text-decoration: underline;
+  color: #ea0208;
+}
+
+.compareList__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.compareList__item img {
+  max-width: 55px;
+  margin-right: 20px;
+}
+
+.compareList__item_delete {
+  min-width: 30px;
+  min-height: 30px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compareList__item .icon-close {
+  width: 14px;
+  height: 14px;
+}
+
+.compareList__title {
+  margin-right: auto;
+}
+
+.compareList__id1c {
+  display: block;
+  color: #888;
+  font-size: 14px;
+}
+
+.comparePrice {
+  display: flex;
+  background-color: #f5f7fb;
+  border-top: 1px solid #dae0e8;
+  border-bottom: 1px solid #dae0e8;
+  margin: 0;
+}
+
+.comparePrice:nth-child(2) {
+  border-bottom: none;
+}
+
+.comparePrice ._catalog-info-footer.good-footer {
+  flex-direction: column;
+  padding: 10px 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.comparePrice .price-wrapper {
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+.comparePrice .good-cart-state-btn {
+  background: #fff;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+}
+
+.comparePrice .good-cart-state-btn.active {
+  background: #ea0208;
+  color: #fff;
+}
+
+.comparePrice .good-cart-state-btn .card_title {
+  display: block;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+.comparePrice .price-wrapper .price-title {
+  position: relative;
+  font-size: 14px;
+}
+
+.comparePrice .price-wrapper .price-base {
+  font-size: 15px;
+}
+
+.comparePrice .price-wrapper .price-main {
+  font-size: 16px;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplibuy</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="header / js-header">
+      <div class="header__wrapper">
+        <a href="/" class="header__logo">Simpli<mark>buy</mark></a>
+        <div class="header__menu">
+          <nav>
+            <a href="#introduce" class="header__menu__item / js-menu-point">Главная</a>
+            <a href="#steps" class="header__menu__item / js-menu-point">Инструкция</a>
+            <a href="#get-premium" class="header__menu__item / js-menu-point">Получить Premium</a>
+          </nav>
+          <a href="mailto:info@simplibuy.ru" class="header__mail-link">info@simplibuy.ru</a>
+        </div>
+      </div>
+    </header>
+    <div class="mobile-menu / js-menu-mobile">
+      <button class="mobile-menu__burger / js-menu-burger">
+        <s></s>
+        <s></s>
+        <s></s>
+      </button>
+      <nav class="mobile-menu__list">
+        <a href="#introduce" class="header__menu__item">Главная</a>
+        <a href="#steps" class="header__menu__item">Инструкция</a>
+        <a href="#get-premium" class="header__menu__item">Получить Premium</a>
+      </nav>
+    </div>
+    <main>
+      <section class="introduce / js-section" id="introduce">
+        <div class="introduce__info">
+          <h1 class="introduce__title">
+            Превратите<br>
+            Ваш <mark>прайс-лист</mark><br>
+            в интернет-магазин<br>
+          </h1>
+          <span class="introduce__under-title">
+            Загрузите Excel-файл на сайт, остальное сделает алгоритм.
+          </span>
+          <form class="get-premium-form">
+            <span class="get-premium-form__caption">
+              Узнайте первым о запуске бета-версии, и получите месяц Premium-подписки бесплатно.
+            </span>
+            <div class="get-premium-form__form-group">
+              <input type="email" name="email" placeholder="Ваш email" class="get-premium-form__text-field">
+              <button class="btn-default get-premium-form__button">Получить <span>Premium</span></button>
+            </div>
+          </form>
+        </div>
+        <div class="introduce__image">
+          <img src="./img/introduce.png" alt="">
+        </div>
+      </section>
+      <section class="advantages">
+        <figure class="advantages__item / js-advantage">
+          <u class="advantages__icon-box _fire-icon"></u>
+          <h3 class="advantages__title">Трендовый дизайн</h3>
+          <figcaption class="advantages__caption">
+            Минималистичный шаблон выделит Ваш сайт на фоне конкурентов.
+          </figcaption>
+        </figure>
+        <figure class="advantages__item / js-advantage">
+          <u class="advantages__icon-box _clock-icon"></u>
+          <h3 class="advantages__title">Настройка за 15 минут</h3>
+          <figcaption class="advantages__caption">
+            Загрузите Excel-файл на сайт, заполните контакты, и получайте первые заявки.
+          </figcaption>
+        </figure>
+        <figure class="advantages__item / js-advantage">
+          <u class="advantages__icon-box _search-icon"></u>
+          <h3 class="advantages__title">SEO-оптимизация</h3>
+          <figcaption class="advantages__caption">
+            Клиенты легко найдут ваш магазин через поиск Яндекс и Google.
+          </figcaption>
+        </figure>
+      </section>
+      <section class="steps-container / js-section" id="steps">
+        <h2 class="steps-container__title">Проще <mark>любого</mark> конструктора сайтов</h2>
+        <span class="steps-container__under-title">
+          Вся подготовка пройдёт в Microsoft Excel. Она займёт не больше 15 минут.
+        </span>
+        <div class="steps-container__wrapper">
+          <ul class="steps">
+            <li class="steps__item">
+              <h3 class="steps__title">
+                <mark>1.</mark>
+                Согласуйте таблицу с инструкцией
+              </h3>
+              <span class="steps__under-title">
+                Мы опубликуем короткий чек-лист при старте бета-версии. <a href="#get-premium">Оставьте свой email</a>, чтобы первым узнать о нашем запуске.
+              </span>
+            </li>
+            <li class="steps__item">
+              <h3 class="steps__title">
+                <mark>2.</mark>
+                Загрузите прайс-лист на сайт
+              </h3>
+              <span class="steps__under-title">
+                Подойдут xls, xlsx, xml или csv-файлы. В большинстве случаев алгоритм сам распознает содержимое.
+              </span>
+            </li>
+            <li class="steps__item">
+              <h3 class="steps__title">
+                <mark>3.</mark>
+                Получите полноценный интернет-магазин
+              </h3>
+              <span class="steps__under-title">
+                Сайт сразу готов приводить вам клиентов, но мы советуем запустить рекламу через Яндекс, Google или социальные сети. «Метрика» будет уже вшита.
+              </span>
+            </li>
+          </ul>
+          <div class="steps-container__image">
+            <img src="./img/look-steps.png" class="scalable / js-scalable">
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer / js-section" id="get-premium">
+      <section class="bottom-premium">
+        <div class="bottom-premium__image">
+          <img src="./img/basic-func.png">
+        </div>
+        <div class="bottom-premium__info">
+          <h2 class="bottom-premium__title">Базовый функционал — <mark>бесплатно</mark></h2>
+          <h3 class="bottom-premium__under-title">
+            Premium-подписка всего за 300 Руб/мес
+          </h3>
+          <div class="bottom-premium__image _mobile">
+            <img src="./img/basic-func.png">
+          </div>
+          <form class="get-premium-form _bottom">
+            <span class="get-premium-form__caption">
+              Мы планируем запустить сервис в начале осени.
+              Узнайте первым о запуске бета-версии, и получите месяц Premium-подписки бесплатно.
+              Мы не будем использовать адрес для спама и рекламы.
+            </span>
+            <div class="get-premium-form__form-group">
+              <input type="email" name="email" placeholder="Ваш email" class="get-premium-form__text-field">
+              <button class="btn-default get-premium-form__button">Получить <span>Premium</span></button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="site-info">
+        <h2 class="site-info__title">Остались вопросы?</h2>
+        <span class="site-info__under-title">Пишите нам на <a href="mailto:info@simplibuy.ru">info@simplibuy.ru</a></span>
+        <span class="site-info__copywrite">© 2020 Команда SimpliBuy.ru ❤</span>
+      </section>
+    </footer>
+
+    <script src="./scripts/index.js" type="module"></script>
+  </body>
+</html>

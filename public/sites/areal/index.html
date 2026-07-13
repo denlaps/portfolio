@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Areal.tech</title>
+  <link rel="stylesheet" type="text/css" href="assets/libs/glide/glide.core.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/libs/glide/glide.theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a class="header__logo" href="#">
+        <img src="assets/logo.png" alt="">
+      </a>
+      <ul class="header__social">
+        <li><a href="https://www.instagram.com/areal_tech/" target="_blank"><img src="assets/ico/inst.png" alt=""></a></li>
+        <li><a href="https://www.facebook.com/tech.areal/" target="_blank"><img src="assets/ico/fb.png" alt=""></a></li>
+        <li><a href="https://tele.gg/areal_tech" target="_blank"><img src="assets/ico/tg.png" alt=""></a></li>
+        <li><a href="mailto:info@areal.tech"><img src="assets/ico/msg.png" alt=""></a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <section class="mainInfo">
+        <h1>
+          Люди откладывают покупку мебели боязни ошибиться.<br>
+          Мы исправили это.
+        </h1>
+        <span>
+          Перенесём ваш каталог 3D-моделей в Instagram и Facebook.<br>
+          Новым клиентам первая AR-маска бесплатно.
+        </span>
+        <form>
+          <div class="wrapper">
+            <input type="text" placeholder="Ваш email">
+            <button>Получить презентацию</button>
+          </div>
+          <label id="acceptMailNews" class="checked">
+            <i></i>
+            <input type="checkbox" checked>
+            Хочу получать новости компании в будущем
+          </label>
+        </form>
+      </section>
+      <section class="mainSlider">
+        <div class="glide">
+          <div class="glide__wrapper">
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+                <li class="glide__slide"><img src="assets/slider/1.png" alt=""></li>
+                <li class="glide__slide"><img src="assets/slider/2.png" alt=""></li>
+                <li class="glide__slide"><img src="assets/slider/3.png" alt=""></li>
+                <li class="glide__slide"><img src="assets/slider/4.png" alt=""></li>
+                <li class="glide__slide"><img src="assets/slider/5.png" alt=""></li>
+                <li class="glide__slide"><img src="assets/slider/6.png" alt=""></li>
+              </ul>
+            </div>
+          </div>
+          <div class="glide__controls" data-glide-el="controls">
+            <button data-glide-dir="<"></button>
+            <button data-glide-dir=">"></button>
+          </div>
+
+          <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+            <button class="glide__bullet" data-glide-dir="=3"></button>
+            <button class="glide__bullet" data-glide-dir="=4"></button>
+            <button class="glide__bullet" data-glide-dir="=5"></button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="assets/libs/glide/glide.min.js"></script>
+
+  <script>
+
+    function toggleCheck(ev) {
+      ev.preventDefault();
+      const $label = ev.target.closest('label');
+      const $check = $label.querySelector('input');
+      $label.classList.toggle('checked');
+
+      const currCheck = $check.getAttribute('checked');
+      $check.setAttribute('checked', !currCheck);
+    }
+
+    function freezeScroll() {
+      window.scrollTo(0, 0);
+    }
+  
+    document.addEventListener('DOMContentLoaded', () => {
+
+      if(window.innerWidth <= 960) {
+        window.addEventListener('scroll', freezeScroll);
+      }
+
+      // Show elements
+      (function () {
+        const $infoBlock = document.querySelector('.mainInfo');
+        const $slider = document.querySelector('.mainSlider');
+        const $header = document.querySelector('header');
+
+        setTimeout(() => {
+          $infoBlock.classList.add('showBlock');
+        }, 0);
+
+        setTimeout(() => {
+          $slider.classList.add('showBlock');
+        }, 200);
+
+        setTimeout(() => {
+          $header.classList.add('showBlock');
+          window.removeEventListener('scroll', freezeScroll);
+          documentReady();
+        }, 600);
+      })();
+
+    });
+
+    function documentReady() {
+      new Glide('.glide').mount({
+        type: 'carousel',
+        startAt: 0,
+        perView: 1,
+        bound: true
+      });
+
+      document.getElementById('acceptMailNews').addEventListener('mousedown', toggleCheck);
+    }
+  </script>
+</body>
+</html>

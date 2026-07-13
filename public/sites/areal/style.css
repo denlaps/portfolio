@@ -1,0 +1,401 @@
+* {
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  padding: 0 80px;
+  width: 100%;
+  max-width: 1400px;
+}
+
+input[type="text"] {
+  flex: 1;
+  border: 2px solid #AEAFB2;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #435464;
+  padding: 14px 17px;
+  transition: border 300ms ease;
+}
+
+input[type="text"]:focus {
+  border: 2px solid #0066FF;
+}
+
+button {
+  background: #0066FF;
+  color: #fff;
+  border-radius: 4px;
+  padding: 14px 32px;
+  margin-left: 8px;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+button:hover {
+  background-color: #0059de;
+}
+
+button:active {
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .3) inset;
+}
+
+form input[type="checkbox"] {
+  display: none;
+}
+
+form label {
+  display: flex;
+  align-items: center;
+}
+
+form label i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid #0066FF;
+}
+
+form label i:after {
+  content: '';
+  background: url('assets/ico/checked.png') center center no-repeat;
+  width: 14px;
+  height: 10.42px;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+form label.checked i:after {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+header {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  z-index: 1;
+  will-change: transform;
+  transition: transform 700ms ease;
+  transform: translate3d(0, -100%, 0);
+}
+
+header .container {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  transition: transform 1.5s ease;
+}
+
+.header__logo:hover {
+  transform: rotateY(360deg);
+}
+
+header ul {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+header ul li {
+  height: inherit;
+}
+
+header ul li a {
+  padding: 8px;
+  height: inherit;
+  transition: background-color 300ms ease;
+}
+
+header ul li a:hover {
+  background-color: #ececec;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  line-height: 100%;
+  color: #435464;
+  overflow-y: hidden;
+}
+
+main .container {
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+main .container > * {
+  will-change: transform, opacity;
+  transition: transform 1.2s ease,
+  opacity 1.2s ease-in-out;
+  opacity: 0;
+  transform: translate3d(0, 30%, 0);
+}
+
+.showBlock {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.mainInfo {
+  margin: 30px 0;
+  flex-basis: 543px;
+  min-width: 543px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainInfo h1 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 125%;
+  color: #0066FF;
+}
+
+.mainInfo span {
+  display: block;
+  margin-top: 30px;
+  font-size: 18px;
+  line-height: 120%;
+}
+
+.mainInfo form {
+  margin-top: 71px;
+  max-width: 600px;
+}
+
+.mainInfo form > * {
+  display: flex;
+}
+
+.mainInfo form label {
+  font-size: 14px;
+  margin-top: 19px;
+}
+
+.mainSlider {
+  width: 35vw;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glide {
+  max-width: 33em;
+  width: 100%;
+  margin: 40px 0;
+}
+
+.glide__wrapper {
+  background: #0066FF;
+  overflow: hidden;
+  border-radius: 16px;
+
+  box-shadow: 0px 1.85406px 2.21381px rgba(0, 0, 0, 0.011262),
+  0px 4.45557px 5.32008px rgba(0, 0, 0, 0.0177216),
+  0px 8.38944px 10.0172px rgba(0, 0, 0, 0.0229739),
+  0px 14.9653px 17.869px rgba(0, 0, 0, 0.0282668),
+  0px 27.991px 33.4221px rgba(0, 0, 0, 0.0349944),
+  0px 67px 80px rgba(0, 0, 0, 0.05);
+}
+
+.glide__controls button {
+  position: absolute;
+  top: calc(50% - 20px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  transition: transform 300ms ease-out;
+}
+
+.glide__controls button::after {
+  content: '';
+  background: url('assets/ico/arrow.png') center center no-repeat;
+  width: inherit;
+  height: inherit;
+  display: block;
+}
+
+.glide__controls button:last-child::after {
+  transform: rotate(180deg);
+}
+
+.glide__controls button:first-child {
+  left: -20px;
+}
+
+.glide__controls button:last-child {
+  right: -20px;
+}
+
+.glide__controls button:first-child:hover {
+  transform: translateX(-5px);
+}
+
+.glide__controls button:last-child:hover {
+  transform: translateX(5px);
+}
+
+.glide img {
+  width: 100%;
+  display: block;
+}
+
+.glide__bullets {
+  display: none;
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .mainInfo {
+    flex-basis: 450px;
+    min-width: unset;
+  }
+  
+  .mainInfo h1 {
+    font-size: 30px;
+  }
+
+  .mainInfo span {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  header {
+    position: fixed;
+  }
+
+  main {
+    height: auto;
+    padding-top: 56px;
+    align-items: flex-start;
+  }
+
+  main .container {
+    margin: 46px 0 20px;
+    flex-direction: column;
+  }
+
+  main .container > * {
+    max-width: unset;
+  }
+
+  .mainInfo {
+    flex-basis: unset;
+    margin: 0;
+    min-width: unset;
+  }
+
+  .mainInfo h1 {
+    font-size: 32px;
+    line-height: 125%;
+  }
+
+  .mainInfo span {
+    font-size: 18px;
+    line-height: 120%;
+  }
+
+  .mainInfo form {
+    margin-top: 62px;
+  }
+
+  .mainSlider {
+    margin-left: 0;
+    width: auto;
+  }
+
+  .glide {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    padding: 0 40px;
+  }
+
+  .mainInfo form .wrapper {
+    flex-direction: column;
+  }
+
+  .mainInfo form label {
+    margin-top: 0;
+  }
+
+  .mainInfo form button {
+    margin: 10px 0;
+  }
+
+  .glide__controls {
+    display: none;
+  }
+
+  .glide__bullets {
+    display: flex;
+    align-items: center;
+    bottom: -23px;
+  }
+
+  .glide__bullet,
+  .glide__bullet:not(.glide__bullet--active):hover {
+    background: #AEAFB2;
+    width: 6px;
+    height: 6px;
+    box-shadow: none;
+    margin: 0 3px;
+    transition: none;
+    border: 0 !important;
+  }
+
+  .glide__bullet--active {
+    background: #0066FF !important;
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 20px;
+  }
+}

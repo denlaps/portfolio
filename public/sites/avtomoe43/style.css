@@ -1,0 +1,476 @@
+html, body {
+	font-family: 'PT Sans Narrow', sans-serif;
+}
+
+body {
+	background:url('img/header_bg.png') top center no-repeat;
+}
+
+h1, h2, h3 {
+	margin:0px;
+	font-weight:bold;
+	color:#000;
+}
+
+h1 {
+	margin-bottom:60px;
+	font-size:33px;
+}
+
+/* Меню */
+
+header {
+	/*background:url('img/left_bg.png') top left no-repeat, url('img/right_bg.png') bottom right no-repeat, url('img/bg.png') repeat-x;*/
+	font-weight:bold;
+	color:#fff;
+	/*box-shadow:0px 150px 250px #003875 inset, 0px -350px 250px #003875 inset;*/
+}
+
+nav ul, nav li {
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+
+header nav {
+	display:inline-block;
+}
+
+header nav li {
+	float:left;
+}
+
+header a {
+	display:inline-block;
+	padding:15px;
+	color:#fff;
+	font-size:19px;
+}
+
+header a:hover {
+	color:#ff0000;
+	text-decoration:none;
+}
+
+/* Контакты и кнопка записи */
+
+header .info {
+	font-size:18px;
+}
+
+header .info p {
+	margin:0px;
+	padding:0px;
+	width:100%;
+}
+
+header .info span {
+	margin:5px 0px;
+	padding-left:25px;
+	display:inline-block;
+	width:150px;
+	white-space:nowrap;
+}
+
+header .info p:nth-child(1) span {
+	background:url('img/ico/info1.png') center left no-repeat;
+}
+
+header .info p:nth-child(2) span {
+	background:url('img/ico/info2.png') center left no-repeat;
+}
+
+header a.btn-goto {
+	background-color:#ff0000;
+	width:100%;
+	padding:9px;
+	margin-top:12px;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:21px;
+	font-weight:600;
+	border-radius:4px;
+	border-bottom:3px #9e0b0f solid;
+	text-align:center;
+}
+
+header a.btn-goto:hover {
+	color:#fff;
+}
+
+header a.btn-goto:active {
+	margin-top:13px;
+	border-bottom:2px #9e0b0f solid;
+}
+
+/* Слайдер */
+
+#slider {
+	margin-top:50px;
+}
+
+.carousel-indicators {
+	bottom:-60px;
+}
+
+.carousel-indicators li {
+	background:#fff;
+	width:11px;
+	height:11px;
+	border-radius:50%;
+}
+
+.carousel-indicators li.active {
+	background:#ff0000;
+}
+
+/* Возможности */
+
+#opportunities {
+	background-color:#007ac7;
+	position:relative;
+	bottom:-100px;
+	padding:25px 50px;
+	color:#fff;
+	font-size:20px;
+}
+
+#opportunities .bigIco {
+	margin:20px auto;
+}
+
+#opportunities .bigIco.calendar {
+	width: 89px; height: 89px;
+    background: url('img/ico/bigIcoSprite.png') -125px -295px;
+}
+
+#opportunities .bigIco.garant {
+	width: 89px; height: 89px;
+    background: url('img/ico/bigIcoSprite.png') -434px -10px;
+}
+
+#opportunities .bigIco.coffee {
+	width: 89px; height: 89px;
+    background: url('img/ico/bigIcoSprite.png') -234px -295px;
+}
+
+#opportunities .bigIco.shop {
+	width: 95px; height: 89px;
+    background: url('img/ico/bigIcoSprite.png') -10px -295px;
+}
+
+/* Видео презентация */
+
+#about {
+	margin-top:135px;
+}
+
+#about h1 {
+	padding-top:45px;
+}
+
+/* Услуги */
+
+#services {
+	background:#007ac7;
+	margin-top:100px;
+	padding:90px 0px;
+	color:#fff;
+	font-size:18px;
+}
+
+#services h3 {
+	margin-bottom:20px;
+	font-size:22px;
+	color:#fff;
+}
+
+#services .col-pad {
+	padding:5px;
+}
+
+#services figure {
+	display:inline-block;
+	width:100%;
+	margin-bottom:0px;
+	padding:25px 25px;
+	border:2px #00488e solid;
+}
+
+@media (max-width:575px) {
+	#services .col-pad {
+		padding-left:0px !important;
+		padding-right:0px !important;
+	}
+}
+
+#services figure:hover {
+	background:#00488e;
+	transition:0.5s;
+}
+
+#services figure img {
+	margin-top:20px;
+}
+
+@media (max-width: 320px) {
+	#services figure img {
+		display:none;
+	}
+}
+
+/* Марки автомобилей */
+
+#brands {
+	margin-top:90px;
+}
+
+#brands h2 {
+	font-size:22px;
+}
+
+#brands img {
+	margin:10px 15px;
+	max-width:45px;
+}
+
+/* Наши преимущества */
+
+#advantages {
+	background:#007ac7;
+	margin-top:90px;
+	padding:90px 0px 70px 0px;
+	color:#fff;
+	font-size:22px;
+}
+
+#advantages h2 {
+	margin-top:50px;
+	width:100%;
+	font-size:27px;
+}
+
+#advantages figcaption {
+	padding:30px 0px;
+}
+
+#advantages .bigIco {
+	margin:0px auto;
+}
+
+#advantages .bigIco.ad1 {
+	width: 121px; height: 121px;
+	background: url('img/ico/bigIcoSprite.png') -151px -153px;	
+}
+
+#advantages .bigIco.ad2 {
+	width: 123px; height: 123px;
+	background: url('img/ico/bigIcoSprite.png') -10px -10px;
+}
+
+#advantages .bigIco.ad3 {
+	width: 123px; height: 121px;
+	background: url('img/ico/bigIcoSprite.png') -153px -10px;
+}
+
+#advantages .bigIco.ad4 {
+	width: 99px; height: 121px;
+	background: url('img/ico/bigIcoSprite.png') -296px -151px;
+}
+
+#advantages .bigIco.ad5 {
+	width: 121px; height: 122px;
+	background: url('img/ico/bigIcoSprite.png') -10px -153px;
+}
+
+#advantages .bigIco.ad6 {
+	width: 118px; height: 121px;
+	background: url('img/ico/bigIcoSprite.png') -296px -10px;
+}
+
+/* Дисконтная система */
+
+#discount {
+	background:#df0000;
+	padding:30px 0px;
+	font-size:31px !important;
+	font-weight:bold;
+	color:#fff;
+}
+
+#discount h2 {
+	margin:20px 0px;
+	color:#fff;
+}
+
+/* Заявка на ремонт */
+
+#application {
+	background:#e9e9e9 url('img/application_bg.png') right bottom no-repeat;
+	padding:90px 0px;
+	height:900px;
+	color:#fff;
+}
+
+#application h1 {
+	margin-bottom:90px;
+}
+
+#application form {
+	background:#007ac7;
+	padding:40px 50px;
+}
+
+#application form h2 {
+	margin-bottom:20px;
+	font-size:33px;
+}
+
+#application input[type="text"], #application textarea {
+	background:#fff;
+	color:#555555;
+	width:100%;
+	margin:10px 0px;
+	padding:10px 15px;
+	font-size:18px;
+	border:none;
+	border-radius:4px;
+}
+
+#application textarea {
+	min-width:100%;
+	max-width:100%;
+	max-height:92px;
+}
+
+#application .subm-btn {
+	background:#ff0000;
+	color:#fff;
+	padding:8px 0px;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:21px;
+	font-weight:600;
+	border:none;
+	border-radius:4px;
+	border-bottom:5px #9e0b0f solid;
+	text-align:center;
+}
+
+#application input[type="submit"]:active {
+	margin-top:2px;
+	border-bottom:3px #9e0b0f solid;
+}
+
+#application span {
+	display:inline-block;
+	width:100%;
+	margin:15px 0px;
+}
+
+#application span a {
+	color:#fff;
+	text-decoration:underline;
+}
+
+@media (max-width:991px) {
+	#application {
+		background-image:none;
+	}
+}
+
+/* Контакты */
+#contacts {
+	margin:45px 0px;
+	font-size:18px;
+}
+
+#contacts h1 {
+	padding-top:45px;
+}
+
+#contacts h2 {
+	font-size:22px;
+	margin:0px 0px 5px 0px;
+}
+
+#contacts h3 {
+	width:100%;
+	margin-top:10px;
+	font-size:20px;
+	text-align:center;
+}
+
+#contacts p {
+	margin:0px;
+	padding:0px;
+	width:100%;
+}
+
+#contacts span {
+	margin:5px 0px;
+	padding-left:35px;
+	display:inline-block;
+}
+
+#contacts p:nth-child(2) span {
+	background:url('img/ico/cont1.png') top left no-repeat;
+}
+
+#contacts p:nth-child(3) span {
+	background:url('img/ico/cont2.png') top left no-repeat;
+}
+
+#contacts p:nth-child(4) span {
+	background:url('img/ico/cont3.png') top left no-repeat;
+}
+
+#contacts img.source {
+	opacity:0.5;
+	width:100%;
+	cursor:pointer;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-o-object-position: center;
+	object-position: center;
+}
+
+#contacts img.active {
+	opacity:1;
+	outline:3px #ff0000 solid;
+}
+
+.no-gutter {
+    padding-right:0;
+    padding-left:0;
+}
+
+#contacts .hidden {
+	display:none;
+}
+
+/* Футер */
+footer {
+	background:#007ac7;
+	padding:18px 0px;
+	color:#fff;
+}
+
+footer a.conf {
+	color:#fff;
+	text-decoration:underline;
+}
+
+footer a.vk-ico {
+	background:url('img/ico/vk_ico.png') center center no-repeat;
+	width:40px;
+	height:40px;
+	display:inline-block;
+}
+
+footer a.five-ico {
+	background:url('img/ico/five_ico.png') left center no-repeat;
+	display:inline-block;
+	padding-left:69px;
+	color:#fff;
+	text-align:left;
+	text-decoration:none;
+}

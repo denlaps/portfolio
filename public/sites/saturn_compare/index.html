@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="slick.css" />
+</head>
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		background: #eee;
+		font-family: Verdana;
+		color: #222;
+	}
+
+	main {
+		background: #fff;
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 760px;
+	}
+</style>
+<body>
+	<main>
+		<h1 class="page_header">Модуль сравнения</h1>
+		
+		<div id="app-compare" class="compareMain" :class="{ 'appLoaded': appLoaded, 'loaderWrapper': loaderWrapper }">
+			<div class="comparePanel" :class="{ minify: panelMinify, sticked: panelSticked }">
+				<div class="compareSlider">
+					<div class="compareSlider__left">
+						<good-view 
+							v-for="(good, index) in goods" 
+							v-key="index" 
+							:good="good"
+						/>
+					</div>
+		
+					<div v-if="secondSlideExist" class="compareSlider__right">
+						<good-view 
+							v-for="(good, index) in goods" 
+							v-key="index" 
+							:good="good"
+						/>
+					</div>
+				</div>
+		
+				<div v-if="secondSlideExist">
+					<div class="compareCount">
+						<span>{{ leftGoodNum }} из {{ goodCount }}</span>
+						<span>{{ rightGoodNum }} из {{ goodCount }}</span>
+					</div>
+		
+					<div class="compareSimilar">
+						<label>
+							<input type="checkbox" v-model="hideSimilar" :disabled="checkDisabled">
+							Различающиеся характеристики
+						</label>
+					</div>
+				</div>
+			</div>
+		
+			<div v-for="(feature, f_index) in features" :key="f_index" v-if="!similarHided(f_index)"
+				:class="{ 'notSame': highlightParam(f_index) }" class="compareFeature">
+				<h3>{{ feature.name }}</h3>
+				<div class="compareFeature__item">
+					<span>{{ getFeatureVal('left', f_index) }}</span>
+					<span v-if="secondSlideExist && !sameGoods">{{ getFeatureVal('right', f_index) }}</span>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<script src="./libs/vue.min.js"></script>
+	<script src="./libs/jquery.min.js"></script>
+	<script src="./libs/slick.min.js"></script>
+
+	<script>
+		Vue.component('good-view', {
+			props: ['good'],
+			template: `
+				<a href="#" class="compareGoodView">
+					<div class="compareGoodView__photo">
+						<img :src="goodSrc" :alt="good.name">
+					</div>
+
+					<div class="compareGoodView__name">
+						{{ good.name }}
+					</div>
+				</a>
+			`,
+			computed: {
+				goodSrc() {
+					return `./photo/${this.good.photo}`;
+				}
+			}
+		})
+	</script>
+	
+	<script>
+		/* GET DATA */
+		const startSlide = {
+			left: 0,
+			right: 1
+		};
+
+		const compareData = {
+			appLoaded: false,
+			loaderWrapper: true,
+			// DEMO GOODS OBJECT
+			goods: [{ "name": "Дрель-шуруповерт Makita 1", "id": "1", "id1c": "тов-111", "price1": "4000.00", "price20": "4000.00", "url": "#", "photo": "55958.jpg", "features": [{ "name": "Мах крутящий момент, Нм", "val": "30" }, { "name": "Мах обороты, об/мин", "val": "1700" }, { "name": "Аккумулятор, В ", "val": "10,8" }, { "name": "Емкость аккумулятора, Ач", "val": "1,5" }, { "name": "Тип аккумулятора", "val": "Li-ion" }, { "name": "Аккумуляторов в комплекте", "val": "Два" }, { "name": "Патрон, мм", "val": "10" }, { "name": "Тип патрона", "val": "Быстрозажимной патрон" }, { "name": "Число ступеней регулировки момента", "val": "20+1" }, { "name": "Мах диаметр сверления (дерево), мм", "val": "21" }, { "name": "Мах диаметр сверления (сталь), мм", "val": "10" }, { "name": "Две и более механических скоростей", "val": "Да " }, { "name": "Электронная регулировка числа оборотов", "val": "✓" }, { "name": "Подсветка рабочей зоны", "val": "✓" }, { "name": "Реверс", "val": "✓" }, { "name": "Блокировка шпинделя", "val": "✓" }, { "name": "Тип товара", "val": "Шуруповерт" }], "quantity": 0, "is_discount": "1", "basic_unit": "шт", "is_market_price": false, "price3'": "4000.00" }, { "name": "Дрель-шуруповерт Trigger 1", "id": "2", "id1c": "тов-222", "price1": "5000.00", "price3": "5000.00", "price20": "5000.00", "url": "#", "photo": "51523.jpg", "features": [{ "name": "Мах крутящий момент, Нм", "val": "27" }, { "name": "Мах обороты, об/мин", "val": "3500" }, { "name": "Аккумулятор, В ", "val": "12" }, { "name": "Емкость аккумулятора, Ач", "val": "1,5" }, { "name": "Тип аккумулятора", "val": "NiCd" }, { "name": "Аккумуляторов в комплекте", "val": "Два" }, { "name": "Патрон, мм", "val": "10" }, { "name": "Тип патрона", "val": "Быстрозажимной патрон" }, { "name": "Число ступеней регулировки момента", "val": "16+1" }, { "name": "Мах диаметр сверления (дерево), мм", "val": "25" }, { "name": "Мах диаметр сверления (сталь), мм", "val": "10" }, { "name": "Две и более механических скоростей", "val": "Да " }, { "name": "Электронная регулировка числа оборотов", "val": "-" }, { "name": "Подсветка рабочей зоны", "val": "✓" }, { "name": "Реверс", "val": "✓" }, { "name": "Блокировка шпинделя", "val": "-" }, { "name": "Тип товара", "val": "Шуруповерт" }], "quantity": 0, "is_discount": "0", "basic_unit": "шт", "is_market_price": false }, { "name": "Батарея аккумуляторная Trigger", "id": "3", "id1c": "тов-333", "price1": "1000.00", "price3": "1000.00", "price20": "1000.00", "url": "#", "photo": "51518.jpg", "features": [{ "name": "Мах крутящий момент, Нм", "val": "Нет данных" }, { "name": "Мах обороты, об/мин", "val": "Нет данных" }, { "name": "Аккумулятор, В ", "val": "18" }, { "name": "Емкость аккумулятора, Ач", "val": "1,5" }, { "name": "Тип аккумулятора", "val": "NiCd" }, { "name": "Аккумуляторов в комплекте", "val": "Нет данных" }, { "name": "Патрон, мм", "val": "Нет данных" }, { "name": "Тип патрона", "val": "Нет данных" }, { "name": "Число ступеней регулировки момента", "val": "Нет данных" }, { "name": "Мах диаметр сверления (дерево), мм", "val": "Нет данных" }, { "name": "Мах диаметр сверления (сталь), мм", "val": "Нет данных" }, { "name": "Две и более механических скоростей", "val": "Нет данных" }, { "name": "Электронная регулировка числа оборотов", "val": "Нет данных" }, { "name": "Подсветка рабочей зоны", "val": "Нет данных" }, { "name": "Реверс", "val": "Нет данных" }, { "name": "Блокировка шпинделя", "val": "Нет данных" }, { "name": "Тип товара", "val": "Комплектующие" }], "quantity": 0, "is_discount": "0", "basic_unit": "шт", "is_market_price": false }, { "name": "Дрель-шуруповерт Trigger 2", "id": "4", "id1c": "тов-444", "price1": "4000.00", "price3": "4000.00", "price20": "4000.00", "url": "#", "photo": "51522.jpg", "features": [{ "name": "Мах крутящий момент, Нм", "val": "33" }, { "name": "Мах обороты, об/мин", "val": "3500" }, { "name": "Аккумулятор, В ", "val": "14,4" }, { "name": "Емкость аккумулятора, Ач", "val": "1,5" }, { "name": "Тип аккумулятора", "val": "NiCd" }, { "name": "Аккумуляторов в комплекте", "val": "Два" }, { "name": "Патрон, мм", "val": "10" }, { "name": "Тип патрона", "val": "Быстрозажимной патрон" }, { "name": "Число ступеней регулировки момента", "val": "16+1" }, { "name": "Мах диаметр сверления (дерево), мм", "val": "25" }, { "name": "Мах диаметр сверления (сталь), мм", "val": "10" }, { "name": "Две и более механических скоростей", "val": "Да " }, { "name": "Электронная регулировка числа оборотов", "val": "-" }, { "name": "Подсветка рабочей зоны", "val": "✓" }, { "name": "Реверс", "val": "✓" }, { "name": "Блокировка шпинделя", "val": "✓" }, { "name": "Тип товара", "val": "Шуруповерт" }], "quantity": 0, "is_discount": "0", "basic_unit": "шт", "is_market_price": false }],
+			currentCompare: {
+				left: startSlide.left,
+				right: startSlide.right
+			},
+			hideSimilar: true,
+			checkDisabled: false,
+			prevCheckSimilar: true,
+			panelMinify: false,
+			panelSticked: false,
+
+			featuresNum: null
+		};
+		/* END */
+	
+		/* === VUE INIT === */
+			const compare = new Vue({
+			el: '#app-compare',
+			data: compareData,
+			computed: {
+				leftGood() {
+					return this.goods[this.currentCompare.left];
+				},
+
+				rightGood() {
+					return this.secondSlideExist ? this.goods[this.currentCompare.right] : null;
+				},
+
+				leftGoodNum() {
+					return this.currentCompare.left + 1;
+				},
+
+				rightGoodNum() {
+					return this.currentCompare.right + 1;
+				},
+
+				goodCount() {
+					return this.goods.length
+				},
+
+				sameGoods() {
+					return this.currentCompare.left === this.currentCompare.right
+				},
+
+				sameParams() {
+					let sameStatus = true
+
+					this.features.forEach((val, f_index) => {
+						const sameParams = this.compareParams(f_index).same;
+
+						if (!sameParams) {
+							sameStatus = false
+						}
+					})
+
+					return sameStatus
+				},
+
+				secondSlideExist() {
+					return this.goodCount > 1
+				},
+
+				features() {
+					return this.goods.length > 0 ? this.goods[0].features : [];
+				}
+			},
+
+			watch: {
+				appLoaded(loaded) {
+					setTimeout(() => {
+						this.loaderWrapper = !loaded;
+					}, 300);
+				},
+
+				sameParams(disable) {
+					this.checkDisabled = disable;
+				},
+
+				featuresNum() {
+					if(this.panelMinify) {
+						document.documentElement.scrollTo(0, 60)
+					}
+				},
+
+				goods() {
+						/* Update compare list in menu at /templates_mobile/blocks/cabinet/compare.php */
+						updateCompareList();
+				}
+			},
+
+			created() {
+				document.addEventListener('scroll', this.handleScroll);
+			},
+
+			mounted() {
+				this.updateFeaturesNum();
+			},
+
+			updated() {
+				const featureExist = $('.compareFeature').length > 0;
+
+				if (!featureExist && this.hideSimilar) {
+					this.hideSimilar = false;
+				}
+
+				this.updateFeaturesNum()
+			},
+
+			methods: {
+				highlightParam(f_index) {
+					// Show if params doesnt same
+					return !this.compareParams(f_index).same && !this.hideSimilar
+				},
+
+				updateFeaturesNum() {
+					this.featuresNum = $('.compareFeature__item').length;
+				},
+
+				handleScroll() {
+					const stickEnabled = this.featuresNum > 3;
+					const startMove = document.documentElement.scrollTop > 0;
+					const startPanel = document.querySelector('.comparePanel').offsetTop > 0;
+
+					console.log({startMove, startPanel})
+
+					this.panelMinify = startMove && stickEnabled;
+					this.panelSticked = startPanel;
+
+					$('.comparePanel').css('position', stickEnabled ? 'sticky' : 'static');
+				},
+
+				compareParams(f_index) {
+					const leftParam = this.getFeatureVal('left', f_index);
+					const rightParam = this.secondSlideExist ? this.getFeatureVal('right', f_index) : undefined;
+					const secondSlideExist = this.secondSlideExist;
+
+					return {
+						left: leftParam,
+						right: rightParam,
+						same: leftParam === rightParam,
+						actual: !(leftParam === 'Нет данных' && rightParam === 'Нет данных') && !(!secondSlideExist && leftParam === 'Нет данных')
+					}
+				},
+
+				getFeatureVal(side, f_index) {
+					try {
+						let feature = this.goods[this.currentCompare[side]] ? this.goods[this.currentCompare[side]].features[f_index].val : '';
+
+						const regExp = new RegExp('<br>', 'gi')
+						feature = feature.replace(regExp, ', ').replace('&quot;', '"');
+
+						return this.goods.length > 0 ? feature : '';
+					} catch (e) {
+						console.log('Error: ', side, f_index, this.currentCompare[side])
+						throw e
+					}
+				},
+
+				getSrc(photo) {
+					return photo ? '/gallery/goods_photo/s_' + photo : '/images/no_photo.png';
+				},
+
+				goTo(url) {
+					location.href = url
+				},
+
+				// If (hideSimilar checked and they are same) OR both params doesn't have data ==> then hide param line
+				similarHided(f_index) {
+					const compareParams = this.compareParams(f_index);
+					return (this.hideSimilar && compareParams.same) || !compareParams.actual;
+				},
+
+				// If prev hideSimilar was checked, then check it again after same goods compare
+				holdCheck() {
+					this.hideSimilar = this.prevCheckSimilar && !this.sameParams ? true : false;
+				},
+
+				removeItem(item) {
+						/* AJAX query to add/remove compare at /templates_mobile/blocks/cabinet/compare.php */
+						compareAJAX(this.goods[item].id, () => {
+							// Remove and sync with slick slider
+							$('.compareSlider__left').slick('slickRemove', item + 1, true);
+							$('.compareSlider__right').slick('slickRemove', item + 1, true);
+							this.currentCompare.left = $('.compareSlider__left').slick('slickCurrentSlide');
+							this.currentCompare.right = $('.compareSlider__right').slick('slickCurrentSlide');
+
+							this.goods.splice(item, 1);
+
+							if (this.goods.length === 0) {
+								location.href = location.search !== '' ? '/compare/' : '/';
+							}
+						});
+				}
+			}
+		});
+		/* END */
+	
+		/* INIT SLIDER */
+			function getCurrentSide(ctx) {
+					const $element = $(ctx);
+					return $element.attr('class').match(/compareSlider__\w+/gi)[0].replace('compareSlider__', '');
+				}
+	
+			$('.compareSlider__left, .compareSlider__right').each(function (el, index) {
+					const rightSlider = $(this).hasClass('compareSlider__right');
+					const side = getCurrentSide(this);
+
+					const options = {
+						arrows: false,
+						dots: false,
+						autoplay: false,
+						loop: true,
+						initialSlide: startSlide[side]
+					}
+
+					$(this).on('init', function () {
+						compare.appLoaded = true;
+					});
+
+					// Init left slide and right slide if it exist
+					if ((rightSlider && compare.secondSlideExist) || !rightSlider) {
+						$(this).slick(options);
+					}
+				});
+		/* END */
+	
+		/* Merge index with Vue */
+			$('.compareSlider__left, .compareSlider__right').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+				if (compare.sameParams) {
+					compare.holdCheck()
+					compare.hideSimilar = compare.prevCheckSimilar
+				}
+
+				const side = getCurrentSide(this);
+				compare.currentCompare[side] = nextSlide;
+			});
+		/* End */
+	</script>
+</body>
+</html>
