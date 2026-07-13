@@ -1,5 +1,17 @@
 [
   {
+    "title": "Нативный слайдовый скролл",
+    "url": "",
+    "demo": "https://denlaps.github.io/sites/slidePages/",
+    "github": "https://github.com/denlaps/slidePages",
+    "img": "https://denlaps.github.io/photos/slidePages.jpg",
+    "meta": {
+      "year": 2020,
+      "tech": ["html5", "css3", "js", "gulp", "sass", "bem"]
+    },
+    "description": "Тестовое задание со скроллом наподобие слайдов в презентации на нативном JS."
+  },
+  {
     "title": "Сайт-портфолио",
     "url": "https://denlaps.github.io",
     "github": "https://github.com/denlaps/portfolio",
@@ -50,6 +62,7 @@
     "title": "Модуль сравнения товаров",
     "url": "",
     "github": "",
+    "demo": "https://denlaps.github.io/sites/saturn_compare/",
     "img": "/photos/saturn_compare.jpg",
     "meta": {
       "employer": "Сатурн Строймаркет",
@@ -61,6 +74,7 @@
   {
     "title": "Areal.tech",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/areal/",
     "img": "/photos/areal.jpg",
     "meta": {
       "employer": "Areal",
@@ -72,6 +86,7 @@
   {
     "title": "HTML-письмо для Areal",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/areal_mail/",
     "img": "/photos/areal_mail.jpg",
     "meta": {
       "employer": "Areal",
@@ -83,6 +98,7 @@
   {
     "title": "Десктопная версия Frimis",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/frimis_desk/",
     "img": "/photos/frimis_desk.jpg",
     "meta": {
       "employer": "Frimis",
@@ -94,6 +110,7 @@
   {
     "title": "Мобильная версия Frimis",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/frimis_mobile/",
     "img": "/photos/frimis_mob.jpg",
     "meta": {
       "employer": "Frimis",
@@ -105,6 +122,7 @@
   {
     "title": "Тестовое задание для Сатурна",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/test_saturn/",
     "img": "/photos/saturn_test_page.jpg",
     "meta": {
       "employer": "Сатурн Строймаркет",
@@ -116,6 +134,7 @@
   {
     "title": "Тестовое задание для IQ Option",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/iqoption_mail/",
     "img": "/photos/iqoption_email.jpg",
     "meta": {
       "employer": "IQ Option",
@@ -127,6 +146,7 @@
   {
     "title": "Франшиза Блогеры-дети",
     "url": "https://франшиза.блогеры-дети.рф",
+    "demo": "https://denlaps.github.io/sites/franchise_blogery/",
     "img": "/photos/fr_blogery.jpg",
     "meta": {
       "employer": "5agency",
@@ -138,6 +158,7 @@
   {
     "title": "Автомое",
     "url": "https://avtomoe43.ru",
+    "demo": "https://denlaps.github.io/sites/avtomoe43/",
     "img": "/photos/avtomoe.jpg",
     "meta": {
       "employer": "5agency",
@@ -149,6 +170,7 @@
   {
     "title": "Лагерь Блогеры-Дети",
     "url": "https://лагерь.блогеры-дети.рф",
+    "demo": "https://denlaps.github.io/sites/camp_blogery/",
     "img": "/photos/summercamp.jpg",
     "meta": {
       "employer": "5agency",
@@ -160,6 +182,7 @@
   {
     "title": "Франшиза Сели-Поели",
     "url": "",
+    "demo": "https://denlaps.github.io/sites/seli_poeli/",
     "img": "/photos/selipoeli.jpg",
     "meta": {
       "employer": "Сели-Поели",
