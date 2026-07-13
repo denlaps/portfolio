@@ -14,7 +14,6 @@
     "title": "Тестовое задание от SkyNet",
     "url": "",
     "github": "",
-    "demo": "/sites/skynet_test/",
     "img": "/photos/skynet_test.jpg",
     "meta": {
       "employer": "SkyNet",
@@ -27,7 +26,6 @@
     "title": "Интерфейс парсинга акций для генератора рассылки",
     "url": "",
     "github": "https://github.com/denlaps/",
-    "demo": "/sites/letterGen/",
     "img": "/photos/saturn_letterGen.jpg",
     "meta": {
       "employer": "Сатурн Строймаркет",
