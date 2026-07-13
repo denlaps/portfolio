@@ -4,26 +4,31 @@
       class="skills changeTab"
       :class="showSkills"
     >
-      <div class="wrapper">
+      <div class="wrapper skills-stack">
         <h2>{{ state.subtitle.pages[1] }}</h2>
-        <span>рассчитываются исходя из частоты использования в проектах</span>
-        <figure 
-          v-for="(skill, s_key) in skillsList" 
-          :key="s_key" 
-          class="skills__item"
+        <article
+          v-for="(group, g_key) in skills.groups"
+          :key="g_key"
+          class="skills-stack__group"
         >
-          <i class="icon">
-            <svg width="100%" height="100%">
-              <use :xlink:href="getSkillSVG(skill.name)" overflow="visible" />
-            </svg>
-          </i>
-          <figcaption>
-            <span>{{ skill.title }}</span>
-            <u class="skills__line">
-              <hr :style="{ 'width': skill.level + '%' }">
-            </u>
-          </figcaption>
-        </figure>
+          <h3>{{ group.title }}</h3>
+          <ul class="skills-stack__list">
+            <li
+              v-for="(item, i_key) in group.items"
+              :key="i_key"
+              class="skills-stack__item"
+            >
+              <svg
+                v-if="item.icon"
+                class="skills-stack__icon"
+                aria-hidden="true"
+              >
+                <use :href="getSkillSVG(item.icon)" />
+              </svg>
+              <span class="skills-stack__label">{{ item.title }}</span>
+            </li>
+          </ul>
+        </article>
       </div>
     </section>
     <section 
@@ -38,7 +43,7 @@
       </h2>
       <div class="wrapper">
         <p class="portfolio-alert" role="alert">
-          Работы и стек обновлялись в 2020 году.
+          Работы обновлялись в 2020 году.
         </p>
         <figure 
           v-for="(work, w_key) in works" 
@@ -100,8 +105,24 @@
 
 <script>
 import state from '../appState.js'
-import techsSvg from '../assets/svg/techs.svg?url'
 import { publicPath } from '../utils/publicPath.js'
+
+const LEGACY_TECH_TITLES = {
+  html5: 'HTML5',
+  css3: 'CSS3',
+  js: 'JavaScript',
+  vuejs: 'Vue.js',
+  nodejs: 'Node.js',
+  bootstrap4: 'Bootstrap 4',
+  jq: 'jQuery',
+  modx: 'ModX',
+  gulp: 'Gulp',
+  figma: 'Figma',
+  sass: 'Sass (SCSS)',
+  email: 'Email (HTML Table)',
+  photoshop: 'Photoshop',
+  bem: 'BEM'
+}
 
 export default {
   data() {
@@ -114,7 +135,9 @@ export default {
       currentPanel: null,
       movePanel: false,
       works: [],
-      skills: [],
+      skills: {
+        groups: []
+      },
       state
     }
   },
@@ -125,10 +148,9 @@ export default {
     },
 
     infoTechList() {
-      return this.infoPanel.meta.tech.map((tech) => {
-        const skill = this.skills.find(skill => skill.name === tech);
-        return skill ? skill.title : null;
-      }).filter(skill => skill);
+      return this.infoPanel.meta.tech
+        .map((tech) => LEGACY_TECH_TITLES[tech] || tech)
+        .filter(Boolean)
     },
 
     showPanel() {
@@ -161,23 +183,6 @@ export default {
         'low-layer': this.state.menuOpened, // Change block pos if menu opened
         'undisplayed': !this.displayWorks
       }
-    },
-
-    skillsList() {
-      return this.skills.map((skill) => {
-        // Count level by num of works
-        let skillCount = 0;
-        this.works.forEach((work) => {
-          if(work.meta.tech.indexOf(skill.name) !== -1) skillCount++;
-        });
-
-        skill.level = skillCount / this.works.length * 100;
-
-        return skill
-      })
-        .filter(skill => skill.level !== 0)
-        .sort((a, b) => b.level - a.level)
-      
     }
   },
 
@@ -242,7 +247,7 @@ export default {
     },
 
     getSkillSVG(name) {
-      return `${techsSvg}#${name}`
+      return `#${name}`
     },
 
     cutUrl(url) {
@@ -282,7 +287,7 @@ export default {
   main {
     .skills {
       height: calc(100% - 71px) !important;
-      padding: 20px 40px;
+      padding: 28px 40px 36px;
       display: flex;
       justify-content: center;
       color: $lightBlue;
@@ -293,50 +298,85 @@ export default {
         overflow-y: auto;
       }
 
-      .wrapper {
+      .skills-stack {
         width: 100%;
-        max-width: 90%;
+        max-width: 720px;
 
-        & > span {
-          display: block;
-          color: rgba(216, 255, 255, 0.2);
-          margin-bottom: 30px;
-        }
-        
         h2 {
-          font-family: "Montserrat";
+          font-family: "Montserrat", sans-serif;
           font-size: 28px;
-          margin-top: 20px;
-        }
-      }
-
-      &__item {
-        width: 100%;
-        display: flex;
-        color: $lightBlue;
-        margin-bottom: 30px;
-
-        i.icon {
-          width: 35px;
-          min-width: 35px;
-          height: 35px;
+          margin: 20px 0 24px;
+          color: $lightBlue;
         }
 
-        figcaption {
-          flex: 1;
-          font-size: 17px;
-          margin-left: 15px;
+        &__group {
+          margin-bottom: 32px;
+          padding: 28px 28px;
+          border-radius: 16px;
+          background: rgba(29, 33, 56, 0.42);
+          border: 1px solid rgba(216, 255, 255, 0.1);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          h3 {
+            margin: 0 0 18px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(216, 255, 255, 0.48);
+          }
+        }
+
+        &__list {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        &__item {
           display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+          align-items: center;
+          gap: 14px;
+          padding: 14px 4px;
+          border-bottom: 1px solid rgba(216, 255, 255, 0.1);
+          color: $lightBlue;
+          font-family: 'Roboto', sans-serif;
+          font-size: 17px;
+          line-height: 1.4;
+          transition: color $trDelay;
 
-          u {
-            background-color: #3B4F62;
-            hr {
-              border: 0;
-              border-bottom: 4px solid $lightBlue;
+          &:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+          }
+
+          &:first-child {
+            padding-top: 0;
+          }
+
+          &:hover {
+            color: #fff;
+
+            .skills-stack__icon {
+              opacity: 1;
             }
           }
+        }
+
+        &__icon {
+          flex-shrink: 0;
+          width: 22px;
+          height: 22px;
+          color: inherit;
+        }
+
+        &__label {
+          flex: 1;
         }
       }
     }
@@ -503,6 +543,24 @@ export default {
   }
 
   @media (max-width: 600px) {
+    main .skills .skills-stack {
+      &__group {
+        padding: 22px 18px;
+        border-radius: 14px;
+      }
+
+      &__item {
+        font-size: 16px;
+        padding: 12px 0;
+        gap: 12px;
+      }
+
+      &__icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
     main .works {
       .portfolio-alert {
         padding: 10px 14px;

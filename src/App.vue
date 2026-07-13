@@ -55,6 +55,8 @@
       </span>
       <span class="hosting-badge__text">Сайт хостится моим PaaS</span>
     </a>
+
+    <div class="svg-sprite" aria-hidden="true" v-html="techsSprite" />
   </div>
 </template>
 
@@ -62,6 +64,7 @@
 import Menu from './components/Menu.vue'
 import state from './appState.js'
 import { publicPath } from './utils/publicPath.js'
+import techsSprite from './assets/svg/techs.svg?raw'
 
 export default {
   name: 'app',
@@ -70,7 +73,8 @@ export default {
     return {
       state,
       subtitle: state.subtitle,
-      pipecoreLogoSrc: publicPath('/pipecore-dark.svg')
+      pipecoreLogoSrc: publicPath('/pipecore-dark.svg'),
+      techsSprite
     }
   },
 
@@ -214,6 +218,13 @@ export default {
       padding-right: 2px;
       font-weight: 500;
     }
+  }
+
+  .svg-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 
   @media (max-width: 600px) {
