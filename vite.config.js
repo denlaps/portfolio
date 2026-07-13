@@ -4,72 +4,75 @@ import { fileURLToPath, URL } from 'node:url'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const SITE_ROOT_RE = /^\/sites\/([^/]+)(?:\/?|\/index(?:\.html)?)$/
+function createSitesMiddleware(sitesRoot) {
+  return (req, res, next) => {
+    const rawUrl = req.url ?? ''
+    const [urlPath, query = ''] = rawUrl.split('?')
 
-function resolveSiteIndex(siteName, rootDir) {
-  return path.join(rootDir, 'sites', siteName, 'index.html')
-}
+    if (!urlPath.startsWith('/sites/')) {
+      return next()
+    }
 
-function listDemoSites(sitesDir) {
-  if (!fs.existsSync(sitesDir)) return []
+    const relative = decodeURIComponent(urlPath.slice('/sites/'.length)).replace(/^\/+/, '')
+    const querySuffix = query ? `?${query}` : ''
 
-  return fs.readdirSync(sitesDir).filter((name) => {
-    const siteDir = path.join(sitesDir, name)
-    return fs.statSync(siteDir).isDirectory() &&
-      fs.existsSync(path.join(siteDir, 'index.html'))
-  })
-}
+    if (!relative) {
+      res.statusCode = 404
+      res.setHeader('Content-Type', 'text/html; charset=utf-8')
+      res.end('<!DOCTYPE html><html lang="ru"><body><h1>404</h1></body></html>')
+      return
+    }
 
-function writeStaticWebAppConfig(distDir, sites) {
-  const routes = sites.flatMap((site) => [
-    { route: `/sites/${site}`, rewrite: `/sites/${site}/index.html` },
-    { route: `/sites/${site}/`, rewrite: `/sites/${site}/index.html` },
-    { route: `/sites/${site}/index`, rewrite: `/sites/${site}/index.html` }
-  ])
+    const segments = relative.split('/').filter(Boolean)
+    if (segments.some((segment) => segment === '..' || segment === '.')) {
+      res.statusCode = 400
+      res.end('Bad request')
+      return
+    }
 
-  fs.writeFileSync(
-    path.join(distDir, 'staticwebapp.config.json'),
-    `${JSON.stringify({
-      routes,
-      navigationFallback: {
-        rewrite: '/index.html'
+    const directPath = path.join(sitesRoot, ...segments)
+
+    if (fs.existsSync(directPath)) {
+      if (fs.statSync(directPath).isFile()) {
+        return next()
       }
-    }, null, 2)}\n`
-  )
+
+      const indexPath = path.join(directPath, 'index.html')
+      if (fs.existsSync(indexPath)) {
+        req.url = `/sites/${segments.join('/')}/index.html${querySuffix}`
+        return next()
+      }
+    }
+
+    const candidates = [
+      directPath,
+      `${directPath}.html`,
+      path.join(directPath, 'index.html')
+    ]
+
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+        const rel = path.relative(sitesRoot, candidate).split(path.sep).join('/')
+        req.url = `/sites/${rel}${querySuffix}`
+        return next()
+      }
+    }
+
+    res.statusCode = 404
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.end(`<!DOCTYPE html><html lang="ru"><body><h1>404</h1><p>Не найдено: /sites/${relative}</p></body></html>`)
+  }
 }
 
 const staticSitesPlugin = {
   name: 'static-sites',
   configureServer(server) {
-    server.middlewares.use((req, res, next) => {
-      const rawUrl = req.url ?? ''
-      const [urlPath, query = ''] = rawUrl.split('?')
-      if (!urlPath.startsWith('/sites/')) return next()
-
-      const siteMatch = urlPath.match(SITE_ROOT_RE)
-      if (!siteMatch) return next()
-
-      const siteName = siteMatch[1]
-      const indexPath = resolveSiteIndex(siteName, path.join(process.cwd(), 'public'))
-      const indexExists = fs.existsSync(indexPath)
-
-      if (!indexExists) {
-        res.statusCode = 404
-        res.setHeader('Content-Type', 'text/html; charset=utf-8')
-        res.end(`<!DOCTYPE html><html lang="ru"><body><h1>404</h1><p>Демо-сайт «${siteName}» не найден в public/sites.</p></body></html>`)
-        return
-      }
-
-      req.url = `/sites/${siteName}/index.html${query ? `?${query}` : ''}`
-      next()
-    })
+    const sitesRoot = path.join(process.cwd(), 'public', 'sites')
+    server.middlewares.use(createSitesMiddleware(sitesRoot))
   },
-  closeBundle() {
-    const distDir = path.join(process.cwd(), 'dist')
-    const sites = listDemoSites(path.join(distDir, 'sites'))
-    if (!sites.length) return
-
-    writeStaticWebAppConfig(distDir, sites)
+  configurePreviewServer(server) {
+    const sitesRoot = path.join(process.cwd(), 'dist', 'sites')
+    server.middlewares.use(createSitesMiddleware(sitesRoot))
   }
 }
 
