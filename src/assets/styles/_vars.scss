@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $headerHeight: 71px;
 
 $lightBlue: #D8FFFF;
@@ -5,5 +7,5 @@ $goldColor: #FEBB36;
 
 $chSchemeDelay: 700ms;
 
-$changedArrow: lighten($lightBlue, 10%);
+$changedArrow: color.adjust($lightBlue, $lightness: 10%);
 $trDelay: 300ms;
