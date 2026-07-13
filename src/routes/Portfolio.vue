@@ -37,6 +37,9 @@
         </div>
       </h2>
       <div class="wrapper">
+        <p class="portfolio-alert" role="alert">
+          Работы и стек обновлялись в 2020 году.
+        </p>
         <figure 
           v-for="(work, w_key) in works" 
           :key="w_key" 
@@ -346,6 +349,20 @@ export default {
         padding: 28px 32px 36px;
       }
 
+      .portfolio-alert {
+        margin: 0;
+        padding: 12px 18px;
+        border-radius: 12px;
+        background: rgba(255, 187, 54, 0.14);
+        border: 1px solid rgba(254, 187, 54, 0.45);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        color: #fff3c4;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        line-height: 1.4;
+        text-align: center;
+      }
+
       &__item {
         position: relative;
         display: block;
@@ -487,6 +504,12 @@ export default {
 
   @media (max-width: 600px) {
     main .works {
+      .portfolio-alert {
+        padding: 10px 14px;
+        font-size: 13px;
+        border-radius: 10px;
+      }
+
       .wrapper {
         gap: 20px;
         padding: 20px 16px 28px;
