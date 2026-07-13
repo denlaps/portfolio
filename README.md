@@ -1,24 +1,50 @@
-# webpack
+# Portfolio
+
+Vue 3 + Vite portfolio site.
+
+## Requirements
+
+- Node.js 24+ (see `.nvmrc`)
 
 ## Project setup
-```
+
+```bash
 npm install
+cp .env.example .env.local
 ```
 
-### Compiles and hot-reloads for development
+Set your Yandex Maps API key in `.env.local`:
+
 ```
-npm run serve
+VITE_YANDEX_MAPS_API_KEY=your_key_here
 ```
 
-### Compiles and minifies for production
+Get a key at [developer.tech.yandex.ru](https://developer.tech.yandex.ru/) — select **JavaScript API and HTTP Geocoder**.
+
+### Development server
+
+```bash
+npm run dev
 ```
+
+### Production build
+
+```bash
 npm run build
 ```
 
-### Lints and fixes files
+### Preview production build
+
+```bash
+npm run preview
 ```
+
+### Lint
+
+```bash
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## GitHub Pages
+
+The app uses `base: './'` for relative asset paths. For history-mode routing on GitHub Pages, `public/404.html` serves as the SPA fallback.

@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import Menu from './components/Menu'
-import state from './appState'
+import Menu from './components/Menu.vue'
+import state from './appState.js'
 
 export default {
   name: 'app',

@@ -43,11 +43,11 @@
           class="works__item"
           @click="openPanel(w_key)"
         >
-          <img :src="work.img" alt="">
+          <img :src="publicPath(work.img)" alt="">
           <figcaption>
             <h3>{{ work.title }}</h3>
-            <span>{{ cutUrl(work.url) }}</span>
-            <i class="fas fa-search"></i>
+            <span v-if="work.url" class="works__item-url">{{ cutUrl(work.url) }}</span>
+            <span class="works__item-action">Подробнее</span>
           </figcaption>
         </figure>
       </div>
@@ -96,7 +96,9 @@
 </template>
 
 <script>
-import state from '../appState'
+import state from '../appState.js'
+import techsSvg from '../assets/svg/techs.svg?url'
+import { publicPath } from '../utils/publicPath.js'
 
 export default {
   data() {
@@ -224,8 +226,10 @@ export default {
   },
 
   methods: {
+    publicPath,
+
     getData(type) {
-      fetch(process.env.BASE_URL + `/data/${type}.data.json`)
+      fetch(publicPath(`data/${type}.data.json`))
         .then((data) => {
           return data.json();
         })
@@ -235,7 +239,7 @@ export default {
     },
 
     getSkillSVG(name) {
-      return require('../assets/svg/techs.svg') + '#' + name
+      return `${techsSvg}#${name}`
     },
 
     cutUrl(url) {
@@ -335,19 +339,55 @@ export default {
     }
 
     .works {
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        padding: 28px 32px 36px;
+      }
+
       &__item {
         position: relative;
-        display: flex;
+        display: block;
         overflow: hidden;
+        flex: 0 0 auto;
+        width: 100%;
         height: 30vw;
-        margin-bottom: 10px;
+        max-height: 320px;
+        min-height: 220px;
+        margin-bottom: 0;
+        border-radius: 14px;
+        background: #2A343D;
+        border: 1px solid rgba(216, 255, 255, 0.08);
+        box-shadow:
+          0 10px 28px rgba(0, 0, 0, 0.32),
+          0 2px 8px rgba(0, 0, 0, 0.18);
+        cursor: pointer;
+        transition:
+          transform $trDelay,
+          box-shadow $trDelay,
+          border-color $trDelay;
+
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(29, 33, 56, 0) 45%,
+            rgba(29, 33, 56, 0.72) 100%
+          );
+          opacity: 0.45;
+          transition: opacity $trDelay;
+          pointer-events: none;
+        }
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: top center;
-          transition: transform $trDelay;
+          transition: transform 400ms ease, filter $trDelay;
         }
 
         figcaption {
@@ -355,45 +395,108 @@ export default {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: rgba(0, 0, 0, .77);
+          gap: 8px;
+          background: linear-gradient(
+            180deg,
+            rgba(42, 52, 61, 0.15) 0%,
+            rgba(29, 33, 56, 0.94) 100%
+          );
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          inset: 0;
           color: #fff;
           font-family: 'Montserrat', Verdana;
           font-size: 1em;
-          cursor: pointer;
           opacity: 0;
           transition: opacity $trDelay;
 
-          i {
-            margin-top: 15px;
-            font-size: 36px;
-          }
-
           h3 {
-            padding: 0 20px;
+            padding: 0 24px;
             text-align: center;
-          }
-
-          span {
-            display: block;
-            padding: 0 10px;
-            text-align: center;
+            transform: translateY(10px);
+            transition: transform $trDelay;
           }
         }
 
+        &-url {
+          display: block;
+          padding: 0 16px;
+          text-align: center;
+          color: rgba(216, 255, 255, 0.72);
+          font-size: 0.92em;
+          transform: translateY(10px);
+          transition: transform $trDelay;
+        }
+
+        &-action {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 8px;
+          padding: 11px 24px;
+          border-radius: 999px;
+          background: $lightBlue;
+          color: #1D2138;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: 0.03em;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+          transform: translateY(16px);
+          opacity: 0;
+          transition: transform $trDelay, opacity $trDelay, background $trDelay;
+        }
+
         &:hover {
+          transform: translateY(-4px);
+          border-color: rgba(216, 255, 255, 0.32);
+          box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.42),
+            0 4px 12px rgba(0, 0, 0, 0.22),
+            0 0 0 1px rgba(216, 255, 255, 0.14);
+
+          &::after {
+            opacity: 0;
+          }
+
           img {
-            transform: scale(1.1);
+            transform: scale(1.06);
+            filter: brightness(0.72);
           }
 
           figcaption {
             opacity: 1;
           }
+
+          h3,
+          .works__item-url {
+            transform: translateY(0);
+          }
+
+          .works__item-action {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
+
+        &:hover .works__item-action {
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    main .works {
+      .wrapper {
+        gap: 20px;
+        padding: 20px 16px 28px;
+      }
+
+      &__item {
+        height: 250px;
+        min-height: 250px;
+        max-height: none;
+        border-radius: 12px;
       }
     }
   }

@@ -57,6 +57,7 @@ button {
     line-height: 27px;
     color: #1D2138;
     margin-right: 10px;
+    white-space: nowrap;
     transition: background-color $trDelay;
 
     &:hover {

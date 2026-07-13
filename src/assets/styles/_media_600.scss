@@ -53,7 +53,7 @@
 
       &__photo {
         width: 100%;
-        max-width: 320px;
+        max-width: 380px;
 
         img {
           max-width: unset;
@@ -212,16 +212,6 @@
   }
   /* ///////////////// */
 
-  /* == [ABOUT PAGE] == */
-  .page__about {
-    main {
-      .container {
-        padding: 40px 20px !important;
-      }
-    }
-  }
-  /* ///////////////// */
-
   /* == [CONTACTS] == */
   .page__contacts {
     main {
@@ -232,13 +222,8 @@
           width: 100%;
           height: auto;
 
-          &.form-block {
+          &.contacts-block {
             justify-content: center;
-
-            input,
-            textarea, button {
-              max-width: unset !important;
-            }
           }
           
           &.map-block {

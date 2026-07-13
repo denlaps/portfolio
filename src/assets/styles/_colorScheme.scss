@@ -157,7 +157,12 @@
 
 .page {
   &__home {
-    @include newScheme(#292D45, $lightBlue, #1D2135)
+    @include newScheme(#292D45, $lightBlue, #1D2135);
+
+    header {
+      background: rgba(41, 45, 69, 0.72);
+      backdrop-filter: blur(6px);
+    }
   }
 
   &__portfolio {

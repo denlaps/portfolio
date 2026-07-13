@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import state from '../appState'
+import state from '../appState.js'
 
 export default {
   data() {

@@ -45,31 +45,12 @@
   }
   /* /////////////////// */
 
-  /* == [ABOUT PAGE] == */
-  .page__about {
-    main {
-      .container {
-        flex-direction: column;
-        align-items: center;
-
-        section {
-          &.about {
-            &__info {
-              margin-right: 0;
-            }
-          }
-        }
-      }
-    }
-  }
-  /* /////////////////// */
-
   /* == [CONTACTS] == */
   .page__contacts {
     main {
       .container {
         section {
-          &.form-block {
+          &.contacts-block {
             padding: 40px 20px;
           }
         }

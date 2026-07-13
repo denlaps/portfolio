@@ -4,11 +4,10 @@
       v-if="state.showVideo" 
       :class="{ 'show': state.videoEffect }" 
       id="videoBg" 
+      :src="backgroundVideo"
       preload="auto"
-      autoplay loop muted
-    >
-      <source src="../assets/city.mp4" type="video/mp4">
-    </video>
+      autoplay loop muted playsinline
+    />
     <img v-else class="noVideoLayer" :src="getSrc('/photos/no_video.jpg')">
 
     <div class="overlay">
@@ -24,16 +23,17 @@
             Я — frontend-<br>
             разработчик
           </h1>
-          <span>работаю в IT-сфере более 2-х лет</span>
+          <span>работаю в IT-сфере более 7 лет</span>
         </figcaption>
         <div class="delayedRect__photo">
           <img :src="getSrc('/photos/photo2.jpg')" alt="">
           <div class="nextButton">
-            <router-link 
-              tag="button"
+            <router-link
               to="/portfolio"
+              custom
+              v-slot="{ navigate }"
             >
-              Мои работы
+              <button type="button" @click="navigate">Мои работы</button>
             </router-link>
             <i class="arrow">
               <svg width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,13 +52,14 @@
 </template>
 
 <script>
-import state from '../appState'
-import consoleLine from '../components/Console'
+import state from '../appState.js'
+import consoleLine from '../components/Console.vue'
+import { publicPath } from '../utils/publicPath.js'
+import backgroundVideo from '../assets/background.mp4'
 
 export default {
   data() {
     return {
-      rectStep: 2,     
       rectRange: {
         x: 40,
         y: 10
@@ -69,12 +70,8 @@ export default {
         y: 0
       },
 
-      prevCursorPos: {
-        x: 0,
-        y: 0
-      },
-
-      state
+      state,
+      backgroundVideo
     }
   },
 
@@ -96,13 +93,14 @@ export default {
     document.addEventListener('mousemove', this.moveRect)
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.state.videoEffect = false
+    document.removeEventListener('mousemove', this.moveRect)
   },
 
   methods: {
     getSrc(url) {
-      return process.env.BASE_URL + url
+      return publicPath(url)
     },
 
     initVideo() {
@@ -115,38 +113,17 @@ export default {
       }
     },
 
-    /* Gen random num in range */
-    getRandFrom(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min
-    },
-
-    /* Does new rect position in range? */
-    inRange(movedPos, param) {
-      return movedPos[param] >= this.rectRange[param] * (-1) && 
-      movedPos[param] <= this.rectRange[param]
-    },
-
-    getMax(param) {
-      return this.brackets[param] < 0 ? this.rectRange[param] * (-1) : this.rectRange[param]
-    },
-  
+    /* Move brackets proportionally to cursor position from screen center */
     moveRect(ev) {
-      const movedPos = {
-        x: this.prevCursorPos.x > ev.clientX ? this.brackets.x - this.rectStep : this.brackets.x + this.rectStep,
-        y: this.prevCursorPos.y > ev.clientY ? this.brackets.y - this.rectStep : this.brackets.y + this.rectStep
-      }
+      const offsetX = (ev.clientX - window.innerWidth / 2) / (window.innerWidth / 2)
+      const offsetY = (ev.clientY - window.innerHeight / 2) / (window.innerHeight / 2)
 
-      const validX = this.inRange(movedPos, 'x')
-      const validY = this.inRange(movedPos, 'y')
+      this.brackets.x = this.clamp(offsetX * this.rectRange.x, -this.rectRange.x, this.rectRange.x)
+      this.brackets.y = this.clamp(offsetY * this.rectRange.y, -this.rectRange.y, this.rectRange.y)
+    },
 
-      // Change pos if it in range
-      this.brackets.x = validX ? movedPos.x : this.getMax('x');
-      this.brackets.y = validY ? movedPos.y : this.getMax('y');
-
-      this.prevCursorPos = {
-        x: ev.clientX,
-        y: ev.clientY
-      }
+    clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value))
     }
   }
 }
@@ -168,14 +145,20 @@ export default {
     video {
       opacity: 0;
       transition: opacity 1s;
-      
+      filter: brightness(1.05) contrast(1.08);
+
       &.show {
         opacity: 1;
       }
     }
 
     .overlay {
-      background: rgba(29, 33, 56, 0.9);
+      background: linear-gradient(
+        135deg,
+        rgba(29, 33, 56, 0.55) 0%,
+        rgba(29, 33, 56, 0.35) 50%,
+        rgba(20, 24, 40, 0.45) 100%
+      );
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -200,10 +183,11 @@ export default {
     padding: 8vh 0;
 
     &__info {
-      width: 50%;
+      width: 46%;
       margin-right: auto;
       z-index: 3;
-      transition: transform 450ms;
+      transition: transform 80ms ease-out;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 
       h1 {
         font-family: 'Montserrat';
@@ -223,10 +207,10 @@ export default {
 
     &__bracket {
       position: absolute;
-      width: 94%;
+      width: 98%;
       height: 5vh;
       border: 4px solid $lightBlue;
-      transition: transform $trDelay;
+      transition: transform 80ms ease-out;
 
       &.top {
         top: 0;
@@ -252,7 +236,7 @@ export default {
         height: 100%;
         min-height: 100%;
         min-width: 100%;
-        max-width: 270px;
+        max-width: 360px;
         object-fit: cover;
         object-position: center;
       }

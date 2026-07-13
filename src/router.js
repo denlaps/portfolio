@@ -1,13 +1,11 @@
-import VueRouter from 'vue-router'
-
-// Import routes
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from './routes/Home.vue'
 import Portfolio from './routes/Portfolio.vue'
 import About from './routes/About.vue'
 import Contacts from './routes/Contacts.vue'
 
-// Settings
-const routes = [{
+const routes = [
+  {
     name: 'Главная',
     path: '/',
     component: Home
@@ -29,15 +27,12 @@ const routes = [{
   }
 ]
 
-// Init
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  mode: 'history'
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
-router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0);
-  next();
-});
-
-export { VueRouter, router }
+export default router
